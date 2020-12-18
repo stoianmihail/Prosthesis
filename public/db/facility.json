@@ -1,0 +1,6 @@
+[
+    {"name" : "Facility 0", "image" : "images/child.png", "coordinates" : {"top" : "320", "left" : "810"}},
+    {"name" : "Facility 1", "image" : "images/child.png", "coordinates" : {"top" : "585", "left" : "650"}},
+    {"name" : "Facility 2", "image" : "images/child.png", "coordinates" : {"top" : "450", "left" : "950"}},
+    {"name" : "Facility 3", "image" : "images/child.png", "coordinates" : {"top" : "350", "left" : "400"}}
+]

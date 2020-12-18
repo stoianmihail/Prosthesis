@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', (event) => {
   var src = document.getElementById("pins")
   console.log(src)
+  
+  /*
   var numPins = 0
   function loadPins() {
     var xhttp = new XMLHttpRequest();
@@ -23,20 +25,33 @@ document.addEventListener('DOMContentLoaded', (event) => {
           span.setAttribute("id", "myPopup_" + i)
           span.className = "popuptext"
           
-          var button = document.createElement("button")
-          button.setAttribute("id", "button_" + i)
-          button.className = 'view'
-          button.textContent = 'test value';
-          span.appendChild(button)
+          // View button
+          var viewButton = document.createElement("button")
+          viewButton.setAttribute("id", "button_" + i)
+          viewButton.className = 'viewButton'
+          viewButton.setAttribute("onclick", "fetchPatientId(this)");
+          viewButton.textContent = 'View';
+          span.appendChild(viewButton)
+          
+          // <a class="close" onclick="closePopup(this);">×</a></span>
+          var closeButton = document.createElement("a")
+          closeButton.setAttribute("id", "close_" + i)
+          closeButton.className = 'close';
+          closeButton.textContent = '×';
+          closeButton.setAttribute("onclick", "closePopup(this)");
+          span.appendChild(closeButton);
           
           var img = document.createElement("img")
-          img.src = 'images/pin.png'
+          console.log(pin["status"])
+          if (pin["status"] == "true")
+            img.src = 'images/green_pin.png'
+          else
+            img.src = 'images/red_pin.png'
           img.className = 'pin'
-          img.style.top = pin["top"] + 'px'
-          img.style.left = pin["left"] + 'px'
+          img.style.top = pin["coordinates"]["top"] + 'px'
+          img.style.left = pin["coordinates"]["left"] + 'px'
           img.setAttribute("id", "pin_" + i);
           img.setAttribute("onmouseover", "mouseOver(this)");
-          // img.setAttribute("onmouseout", "mouseOut(this)")
           
           curr.appendChild(span)
           curr.appendChild(img)
@@ -44,16 +59,76 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
       }
     };
-    xhttp.open("GET", "pin.json", true);
+    xhttp.open("GET", "db/patient.json", true);
     xhttp.send();
+  }  
+  //loadPins()
+  */
+  
+  var numFacilities = 0;
+  function loadFacilities() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log("now=" + this.responseText)
+        var response = JSON.parse(this.responseText)
+        console.log(response)
+        console.log(response.length)
+        numFacilities = response.length
+        for (var i = 0, size = response.length; i < size; i++) {
+          var pin = response[i];
+          console.log(pin)
+          
+          var curr = document.createElement("div");
+          curr.setAttribute("id", "popup_" + i);
+          curr.className = "popup";
+          
+          var span = document.createElement("span")
+          span.setAttribute("id", "myPopup_" + i)
+          span.className = "popuptext"
+          
+          // View button
+          var viewButton = document.createElement("button")
+          viewButton.setAttribute("id", "button_" + i)
+          viewButton.className = 'viewButton'
+          viewButton.setAttribute("onclick", "fetchFacilityId(this)");
+          viewButton.textContent = 'View';
+          span.appendChild(viewButton)
+          
+          // <a class="close" onclick="closePopup(this);">×</a></span>
+          var closeButton = document.createElement("a")
+          closeButton.setAttribute("id", "close_" + i)
+          closeButton.className = 'close';
+          closeButton.textContent = '×';
+          closeButton.setAttribute("onclick", "closePopup(this)");
+          span.appendChild(closeButton);
+          
+          var img = document.createElement("img")
+          img.src = 'images/facility_pin.png'
+          img.className = 'pin'
+          img.style.top = pin["coordinates"]["top"] + 'px'
+          img.style.left = pin["coordinates"]["left"] + 'px'
+          img.setAttribute("id", "pin_" + i);
+          img.setAttribute("onmouseover", "mouseOver(this)");
+          
+          curr.appendChild(span)
+          curr.appendChild(img)
+          src.appendChild(curr)
+        }
+      }
+    };
+    xhttp.open("GET", "db/facility.json", true);
+    xhttp.send();
+  }  
+  loadFacilities()
+
+  
+  function loadFacilityId(id) {
+    window.location = '/facility.ejs?id=' + id;
   }
   
-  loadPins()
-
-  console.log(src)
-  
   var isActive = []
-  for (var index = 0; index != numPins; ++index)
+  for (var index = 0; index != numFacilities; ++index)
     isActive.push(true)
   
   mouseOver = function(elem) {
@@ -74,11 +149,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
     popup.classList.toggle("show");
   }
   
-  mouseOut = function(elem) {
-    /*
+  closePopup = function(elem) {
     console.log(elem.id)
-    var popup = document.getElementById("myPopup");
+    var index = elem.id.split("_")[1]
+    isActive[parseInt(index)] = false;
+    var popup = document.getElementById("myPopup_" + index);
     popup.classList.toggle("show");
-*/
+  }
+  
+  fetchFacilityId = function(elem) {
+    console.log("fetch " + elem.id);
+    // window.location = 'http://localhost:8080/case.html'
+    loadFacilityId(parseInt(elem.id.split("_")[1]));
   }
 })

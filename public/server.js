@@ -1,52 +1,45 @@
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
-const port = 8080; 
+var express = require('express')
+var app = express()
+const port = 8080;
 
-var map = {'js' : 'text/javascript', 'css' : 'text/css', 'png' : 'image/png', 'json' : 'application/json', 'ico' : 'image/x-icon'}
+app.set('view engine', 'ejs');
 
-function readFileWrapper(res, pathname) {
-  var ext = path.pathname.substr(path.pathname.lastIndexOf('.') + 1);
-  var type = map[ext]
-  console.log("read " + pathname)
-  res.writeHead(200, {'Content-Type': type})
-  fs.readFile(__dirname + pathname, function(error, data) {
-    if (error) {
-      res.writeHead(404)
-      res.write('Error: File not found')
-    } else {
-      res.write(data)
-    }
-    res.end()
-  })
-}
+app.route('/', function(req, res) {
+   res.sendFile(__dirname + '/index.html');
+});
 
-const server = http.createServer(function(req, res) {
+app.route('/facility.ejs').get((req, res) => {
   path = url.parse(req.url)
-  switch(path.pathname) {
-    case '/': {
-      // Load index.html
-      res.writeHead(200, {'Content-Type': 'text/html'})
-      fs.readFile('index.html', function(error, data) {
-        if (error) {
-          res.writeHead(404)
-          res.write('Error: File not found')
-        } else {
-          res.write(data)
-        }
-        res.end()
-      })
-      break;
-    }
-    default: {
-      // Load others
-      readFileWrapper(res, path.pathname)
-      break;
-    }
+  const queryObject = url.parse(req.url, true).query;
+  console.log(queryObject)
+  if (queryObject.id) {
+    console.log(queryObject.id)
+    var data = {name : 'Test', id : queryObject.id} 
+    res.render('facility', {data : data}); 
+  } else {
+    res.status(404).send('<h1> Page not found </h1>');
   }
-})
+});
 
-server.listen(port, function(error) {
+app.route('/case.ejs').get((req, res) => {
+  path = url.parse(req.url)
+  const queryObject = url.parse(req.url, true).query;
+  console.log(queryObject)
+  if (queryObject.id) {
+    console.log(queryObject.id)
+    var data = {name : 'Test', id : queryObject.id} 
+    res.render('case', {data : data}); 
+  } else {
+    res.status(404).send('<h1> Page not found </h1>');
+  }
+});
+
+app.use(express.static(__dirname));
+
+var sever = app.listen(port, function(error) {
   if (error) {
     console.log('Something went wrong', error)
   } else {

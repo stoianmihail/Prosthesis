@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:400,600');
 body {
 	margin: 0;
-	background: #222;
+	background: #eaeaea;
 	font-family: 'Work Sans', sans-serif;
 	font-weight: 800;
   &.modal-active {
@@ -15,7 +15,14 @@ body {
 }
 
 header {
-  background: #55d6aa;
+  background: #c5aa6a;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.08),
+              0 2px 2px rgba(0,0,0,0.08), 
+              0 4px 4px rgba(0,0,0,0.08), 
+              0 8px 8px rgba(0,0,0,0.08), 
+              0 16px 16px rgba(0,0,0,0.08), 
+              0 32px 32px rgba(0,0,0,0.08);
+
 }
 
 header::after {
@@ -43,7 +50,6 @@ nav li {
   display: inline-block;
   margin-left: 70px;
   padding-top: 23px;
-
   position: relative;
 }
 
@@ -51,7 +57,7 @@ nav a {
   color: #444;
   text-decoration: none;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 nav a:hover {
@@ -87,6 +93,13 @@ nav a:hover::before {
   width: 100%;
   height: 100%;
   margin-top: 1%;
+  border-radius: 10px;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.08),
+              0 2px 2px rgba(0,0,0,0.08), 
+              0 4px 4px rgba(0,0,0,0.08), 
+              0 8px 8px rgba(0,0,0,0.08), 
+              0 16px 16px rgba(0,0,0,0.08), 
+              0 32px 32px rgba(0,0,0,0.08);
 }
 
 .donate .btn {
