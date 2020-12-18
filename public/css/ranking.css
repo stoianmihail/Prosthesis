@@ -17,6 +17,18 @@
   --bronze-dark: #80582c;
 }
 
+.black {
+  color: black;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
+}
+
 .split {
   height: 100%;
   width: 50%;
@@ -29,16 +41,18 @@
 
 .left {
   left:0;
-  background-color: #cfcccc;
-  border-radius: 15px;
   font-size: 15px;
+  background-color: #fefefa;
 }
 
 .right {
   right: 0;
   background-color: #d6492b;
-  border-radius: 15px;
   font-size: 15px;
+}
+
+.center {
+  margin-left: 25%;
 }
 
 .list {
@@ -56,7 +70,8 @@
 .list__table {
   width: 100%;
   border-spacing: 0;
-  color: var(--grey-3);
+  color: var(--grey-9);
+  text-align: center;
 }
 .list__header {
   padding: 3rem 2rem;
@@ -77,12 +92,14 @@
   display: block;
   font-size: 18px;
 }
+
 .list__label {
-  font-size: 11px;
+  font-size: 18px;
   opacity: .6;
 }
 .list__row {
-  background: var(--grey-7);
+  color: var(--gold-dark);
+  background: var(--grey-9);
   cursor: pointer;
   -webkit-transition: all 300ms ease;
   transition: all 300ms ease;
@@ -95,8 +112,12 @@
   transition: all 300ms ease;
 }
 .list__row:not(:last-of-type) .list__cell {
+  color: var(--gold-dark);
+  background: var(--grey-9);
   box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.08);
 }
+
+/*
 .list__row:first-of-type {
   color: var(--gold-dark);
   background: var(--grey-9);
@@ -105,29 +126,15 @@
   background: var(--gold);
   color: var(--gold-dark);
 }
-.list__row:nth-of-type(2) {
-  color: var(--grey-2);
-  background: var(--grey-9);
-}
-.list__row:nth-of-type(2) .list__cell:first-of-type {
-  background: var(--grey-4);
-  color: var(--grey-2);
-}
-.list__row:nth-of-type(3) {
-  color: var(--bronze-dark);
-  background: var(--grey-9);
-}
-.list__row:nth-of-type(3) .list__cell:first-of-type {
-  background: var(--bronze);
-  color: var(--bronze-dark);
-}
+*/
 .list__cell {
   padding: 1rem;
 }
 .list__cell:first-of-type {
   text-align: center;
   padding: 1rem .2rem;
-  background: var(--grey-5);
+  color: var(--gold-dark);
+  background: var(--grey-9);
 }
 
 .overlay {
@@ -278,4 +285,21 @@
     opacity: 1;
     left: 0;
   }
+}
+
+.list__table .progress-box .progress {
+  box-shadow: none;
+  height: 3px;
+}
+
+.list__table .progress-box .progress-bar {
+  transition-duration: 2000ms;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+}
+
+.desc {
+  margin-left: 5%;
+  margin-right: 5%;
+  text-align: center; 
 }

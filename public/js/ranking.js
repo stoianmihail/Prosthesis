@@ -25,13 +25,11 @@ tableRow.forEach(tableRow => {
     const sidebarBody = document.querySelector(".sidebar__body");
     sidebarBody.innerHTML = '';
 
-    const driverPlace = this.querySelector(".list__cell:nth-of-type(1) .list__value").innerHTML;
     const driverName = this.querySelector(".list__cell:nth-of-type(2) .list__value").innerHTML;
-    const driverTeam = this.querySelector(".list__cell:nth-of-type(3) .list__value").innerHTML;
+    const driverTeam = this.querySelector(".list__cell:nth-of-type(4) .list__value").innerHTML;
     const driverPoints = this.querySelector(".list__cell:nth-of-type(4) .list__value").innerHTML;
     const driverImage = this.dataset.image;
     const driverNationality = this.dataset.nationality;
-    const driverDOB = this.dataset.dob;
     const driverCountry = this.dataset.country;
 
     const newDriver = document.createElement('div');
@@ -55,24 +53,8 @@ tableRow.forEach(tableRow => {
 		<table class="driver__table">
 			<tbody>
 				<tr>
-					<td><small>Team</small></td>
-					<td>${driverTeam}</td>
-				</tr>
-				<tr>
-					<td><small>Nationality</small></td>
-					<td><img src="https://www.countryflags.io/${driverCountry}/shiny/24.png">${driverNationality}</td>
-				</tr>
-				<tr>
-					<td><small>Date of birth:</small></td>
-					<td>${driverDOB}</td>
-				</tr>
-				<tr>
-					<td><small>Place</small></td>
-					<td>${driverPlace}</td>
-				</tr>
-				<tr>
-					<td><small>Points</small></td>
-					<td>${driverPoints}</td>
+					<td><small>Missing</small></td>
+					<td style="color: red;">${driverTeam}</td>
 				</tr>
 			</tbody>
 		</table>`;

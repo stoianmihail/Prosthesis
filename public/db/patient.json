@@ -1,15 +1,15 @@
 [
-    {"name" : "Patient 1", "image" : "", "coordinates" : {"top" : "300", "left" : "800"}, "status" : "false"},
-    {"name" : "Patient 2", "image" : "", "coordinates" : {"top" : "450", "left" : "450"}, "status" : "false"},
-    {"name" : "Patient 3", "image" : "", "coordinates" : {"top" : "200", "left" : "300"}, "status" : "true"},
-    {"name" : "Patient 4", "image" : "", "coordinates" : {"top" : "500", "left" : "350"}, "status" : "true"},
-    {"name" : "Patient 5", "image" : "", "coordinates" : {"top" : "450", "left" : "500"}, "status" : "false"},
-    {"name" : "Patient 6", "image" : "", "coordinates" : {"top" : "300", "left" : "750"}, "status" : "false"},
-    {"name" : "Patient 7", "image" : "", "coordinates" : {"top" : "450", "left" : "600"}, "status" : "true"},
-    {"name" : "Patient 8", "image" : "", "coordinates" : {"top" : "200", "left" : "650"}, "status" : "false"},
-    {"name" : "Patient 9", "image" : "", "coordinates" : {"top" : "450", "left" : "500"}, "status" : "false"},
-    {"name" : "Patient 10", "image" : "", "coordinates" : {"top" : "500", "left" : "600"}, "status" : "false"},
-    {"name" : "Patient 11", "image" : "", "coordinates" : {"top" : "550", "left" : "800"}, "status" : "false"},
-    {"name" : "Patient 12", "image" : "", "coordinates" : {"top" : "610", "left" : "650"}, "status" : "false"},
-    {"name" : "Patient 13", "image" : "", "coordinates" : {"top" : "400", "left" : "300"}, "status" : "true"}
+    {"name" : "Wulandari Hartono", "img" : "images/profile.jpg", "coordinates" : {"top" : "300", "left" : "800"}, "sum" : "20", "total" : "100"},
+    {"name" : "Budi Darmawan", "img" : "images/profile.jpg", "coordinates" : {"top" : "450", "left" : "450"}, "sum" : "100", "total" : "200"},
+    {"name" : "Natalena Tirrand", "img" : "images/profile.jpg", "coordinates" : {"top" : "200", "left" : "300"}, "sum" : "50", "total" : "150"},
+    {"name" : "Hasan Suparmanputra", "img" : "images/profile.jpg", "coordinates" : {"top" : "500", "left" : "350"}, "sum" : "150", "total" : "200"},
+    {"name" : "Hasan Prasetyo", "img" : "images/profile.jpg", "coordinates" : {"top" : "450", "left" : "500"}, "sum" : "30", "total" : "100"},
+    {"name" : "Yovan Gunardio Darmawan", "img" : "images/profile.jpg", "coordinates" : {"top" : "300", "left" : "750"}, "sum" : "35", "total" : "75"},
+    {"name" : "Djayasinga", "img" : "images/profile.jpg", "coordinates" : {"top" : "450", "left" : "600"}, "sum" : "45", "total" : "105"},
+    {"name" : "Baidan", "img" : "images/profile.jpg", "coordinates" : {"top" : "200", "left" : "650"}, "sum" : "65", "total" : "175"},
+    {"name" : "Kansil", "img" : "images/profile.jpg", "coordinates" : {"top" : "450", "left" : "500"}, "sum" : "95", "total" : "275"},
+    {"name" : "Malaiholo", "img" : "images/profile.jpg", "coordinates" : {"top" : "500", "left" : "600"}, "sum" : "125", "total" : "375"},
+    {"name" : "Riberu", "img" : "images/profile.jpg", "coordinates" : {"top" : "550", "left" : "800"}, "sum" : "15", "total" : "275"},
+    {"name" : "Wanggai", "img" : "images/profile.jpg", "coordinates" : {"top" : "610", "left" : "650"}, "sum" : "5", "total" : "275"},
+    {"name" : "Soerjaatmadja", "img" : "images/profile.jpg", "coordinates" : {"top" : "400", "left" : "300"}, "sum" : "45", "total" : "75"}
 ]
