@@ -16,7 +16,7 @@ app.route('/facility.ejs').get((req, res) => {
   const queryObject = url.parse(req.url, true).query;
   console.log(queryObject)
   if (queryObject.id) {
-    var id = queryObject.id;
+    var id = parseInt(queryObject.id);
     console.log(queryObject.id);
     
     let rawData = fs.readFileSync(path.join(__dirname, '/db/facility.json'));
@@ -29,10 +29,10 @@ app.route('/facility.ejs').get((req, res) => {
     console.log(facilities)
     
     // Determine its partition
-    for (var i = 0; i != patients.length; ++i) {
+    for (var i = 0; i !== patients.length; ++i) {
       var p = patients[i];
       var minDist = Number.POSITIVE_INFINITY, chosen = -1;
-      for (var j = 0; j != facilities.length; ++j) {
+      for (var j = 0; j !== facilities.length; ++j) {
         var facility = facilities[j];
         var dist = Math.sqrt(Math.pow(p["coordinates"]["top"] - facility["coordinates"]["top"], 2) + Math.pow(p["coordinates"]["left"] - facility["coordinates"]["left"], 2));
         
@@ -43,8 +43,11 @@ app.route('/facility.ejs').get((req, res) => {
           chosen = j;
         }
       }
+      console.log(typeof chosen)
+      
+      console.log(typeof id)
       console.log("last=" + chosen + " vs " + id)
-      if (chosen == id) {
+      if (chosen === id) {
         gathered.push(patients[i])
       }
     }
