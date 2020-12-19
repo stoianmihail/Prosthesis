@@ -1,4 +1,5 @@
 const functions = require('firebase-functions');
+const path = require('path');
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
@@ -7,26 +8,25 @@ var app = express()
 
 app.set('view engine', 'ejs');
 
-app.route('/', function(req, res) {
-  console.log("send: " + __dirname + '/index.html');
-   res.sendFile(__dirname + '/index.html');
+app.route('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '/index.html'));
 });
 
-globalPath = __dirname + '/../public';
-
 app.route('/facility.ejs').get((req, res) => {
-  path = url.parse(req.url)
   const queryObject = url.parse(req.url, true).query;
   console.log(queryObject)
   if (queryObject.id) {
     var id = queryObject.id;
     console.log(queryObject.id);
     
-    let rawData = fs.readFileSync(globalPath + '/db/facility.json');
+    let rawData = fs.readFileSync(path.join(__dirname, '/db/facility.json'));
     let facilities = JSON.parse(rawData);
-    rawData = fs.readFileSync(globalPath + '/db/patient.json');
+    rawData = fs.readFileSync(path.join(__dirname, '/db/patient.json'));
     let patients = JSON.parse(rawData)
     let gathered = []
+    
+    console.log(patients)
+    console.log(facilities)
     
     // Determine its partition
     for (var i = 0; i != patients.length; ++i) {
@@ -35,17 +35,23 @@ app.route('/facility.ejs').get((req, res) => {
       for (var j = 0; j != facilities.length; ++j) {
         var facility = facilities[j];
         var dist = Math.sqrt(Math.pow(p["coordinates"]["top"] - facility["coordinates"]["top"], 2) + Math.pow(p["coordinates"]["left"] - facility["coordinates"]["left"], 2));
+        
+        console.log(minDist + " vs " + dist)
+        
         if (dist < minDist) {
           minDist = dist;
           chosen = j;
         }
       }
+      console.log("last=" + chosen + " vs " + id)
       if (chosen == id) {
         gathered.push(patients[i])
       }
     }
     
-    gathered.sort(function(l, r) { return (l.sum * r.total) > (r.sum * l.total) ? 1 : -1});
+    
+    
+    gathered.sort((l, r) => { return (l.sum * r.total) > (r.sum * l.total) ? 1 : -1});
     console.log(gathered)
     
     res.render('facility', {facility : facilities[id], data : gathered}); 
@@ -55,7 +61,6 @@ app.route('/facility.ejs').get((req, res) => {
 });
 
 app.route('/case.ejs').get((req, res) => {
-  path = url.parse(req.url)
   const queryObject = url.parse(req.url, true).query;
   console.log(queryObject)
   if (queryObject.id) {
@@ -66,5 +71,7 @@ app.route('/case.ejs').get((req, res) => {
     res.status(404).send('<h1> Page not found </h1>');
   }
 });
+
+app.use(express.static(__dirname));
 
 exports.app = functions.https.onRequest(app);
