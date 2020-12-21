@@ -10,7 +10,7 @@ body {
 	margin: auto;
 }
 header {
-	background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(https://i.postimg.cc/YjcJg24M/aa.jpg);
+	background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)), url('../images/run.jpg');
 	height: 100vh;
 	-webkit-background-size: cover;
 	background-size: cover;
@@ -108,4 +108,41 @@ header {
 	.welcome-text h1 {
 		font-size: 30px;
 	}
+}
+
+.btn {
+  position: absolute;
+  top: 10%;
+  left: 75%;
+  width: 200px;
+  height: 60px;
+  border: none;
+  border-radius: 45px;
+  text-align: center;
+  
+  
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #FF0000;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.08),
+              0 2px 2px rgba(0,0,0,0.08), 
+              0 4px 4px rgba(0,0,0,0.08), 
+              0 8px 8px rgba(0,0,0,0.08), 
+              0 16px 16px rgba(0,0,0,0.08), 
+              0 32px 32px rgba(0,0,0,0.08);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  
+}
+
+.btn:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-10px);
 }
