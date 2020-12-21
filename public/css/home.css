@@ -1,13 +1,9 @@
+*, *:after, *:before {
+  box-sizing: border-box;
+}
 * {
 	margin: 0;
 	padding: 0;
-}
-body {
-	font-family: 'Poppins', sans-serif;
-}
-.wrapper {
-	width: 1170px;
-	margin: auto;
 }
 header {
 	background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)), url('../images/run.jpg');
@@ -17,25 +13,58 @@ header {
 	background-position: center center;
 	position: relative;
 }
-.nav-area {
-	float: right;
-	list-style: none;
-	margin-top: 30px;
+body {
+	font-family: 'Poppins', sans-serif;
 }
-.nav-area li {
-	display: inline-block;
+.wrapper {
+	width: 100%;
+	margin: auto;
 }
-.nav-area li a {
-	color: #fff;
-	text-decoration: none;
-	padding: 5px 20px;
-	font-family: poppins;
-	font-size: 16px;
-	text-transform: uppercase;
+
+nav {
+  float: right;
+  margin-right: 15%;
 }
-.nav-area li a:hover {
-	background: #fff;
-	color: #333;
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 70px;
+  padding-top: 20px;
+  position: relative;
+}
+
+nav a {
+  color: #444;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+nav a:hover {
+  color: #000;
+}
+
+nav a::before {
+  content: '';
+  display: block;
+  height: 5px;
+  background-color: #444;
+
+  position: absolute;
+  top: 0;
+  width: 0%;
+
+  transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before {
+  width: 100%;
 }
 .logo {
 	float: left;
@@ -74,42 +103,6 @@ header {
 	background: #fff;
 	color: #333;
 }
-/*resposive*/
-
-@media (max-width:600px) {
-	.wrapper {
-		width: 100%;
-	}
-	.logo {
-		float: none;
-		width: 50%;
-		text-align: center;
-		margin: auto;
-	}
-	img {
-		width: ;
-	}
-	.nav-area {
-		float: none;
-		margin-top: 0;
-	}
-	.nav-area li a {
-		padding: 5px;
-		font-size: 11px;
-	}
-	.nav-area {
-		text-align: center;
-	}
-	.welcome-text {
-		width: 100%;
-		height: auto;
-		margin: 30% 0;
-	}
-	.welcome-text h1 {
-		font-size: 30px;
-	}
-}
-
 .btn {
   position: absolute;
   top: 10%;
