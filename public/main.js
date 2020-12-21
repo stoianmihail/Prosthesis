@@ -162,4 +162,103 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // window.location = 'http://localhost:8080/case.html'
     loadFacilityId(parseInt(elem.id.split("_")[1]));
   }
+  
+  var login = document.getElementById("login-button");
+  var form_modal = document.getElementById("user-modal");
+  var form_login = document.getElementById("login");
+  var form_signup = document.getElementById("signup");
+  var form_forgot_password = document.getElementById('reset-password');
+  var form_modal_tab = document.querySelector(".switcher");
+  var tab_login = document.getElementById("tab-sign-in");
+  var tab_signup = document.getElementById("tab-new-account");
+  var forgot_password_link = form_login.querySelector('.form-bottom-message a');
+  var back_to_login_link = form_forgot_password.querySelector('.form-bottom-message a');
+
+  //open modal
+  login.onclick = function(event){
+    console.log("butttton loggggggin");
+    form_modal.classList.add('is-visible'); 
+    //show the selected form
+    login_selected();
+    //( $(event.target).is('.signup') ) ? signup_selected() : login_selected();
+  }
+  
+  //close modal
+  document.querySelector('.user-modal').onclick = function(event){
+    console.log(event.target);
+    if( $(event.target).is(form_modal) || $(event.target).is('.close-form') ) {
+      form_modal.classList.remove('is-visible');
+    } 
+  }
+  
+  //close modal when clicking the esc keyboard button
+  document.onkeyup = function(event){
+      if(event.which == '27'){
+        form_modal.classList.remove('is-visible');
+      }
+    }
+
+  //switch from a tab to another
+  form_modal_tab.onclick = function(event) {
+    event.preventDefault();
+    ( $(event.target).is( tab_login ) ) ? login_selected() : signup_selected();
+  }
+
+  //hide or show password
+  document.querySelector('.hide-password').onclick = function(){
+    console.log("in hide password");
+    var $this= $(this);
+    var password_field = $this.prev('input');
+    
+    ( 'password' == password_field.attr('type') ) ? password_field.attr('type', 'text') : password_field.attr('type', 'password');
+    ( 'Show' == $this.text() ) ? $this.text('Hide') : $this.text('Show');
+    //focus and move cursor to the end of input field
+    //password_field.putCursorAtEnd();
+  }
+
+  //show forgot-password form 
+  forgot_password_link.onclick = function(event){
+    event.preventDefault();
+    forgot_password_selected();
+  }
+
+  //back to login from the forgot-password form
+  back_to_login_link.onclick = function(event){
+    event.preventDefault();
+    login_selected();
+  }
+
+  function login_selected(){
+    form_login.classList.add('is-selected');
+    form_signup.classList.remove('is-selected');
+    form_forgot_password.classList.remove('is-selected');
+    tab_login.classList.add('selected');
+    tab_signup.classList.remove('selected');
+  }
+
+  function signup_selected(){
+    form_login.classList.remove('is-selected');
+    form_signup.classList.add('is-selected');
+    form_forgot_password.classList.remove('is-selected');
+    tab_login.classList.remove('selected');
+    tab_signup.classList.add('selected');
+  }
+
+  function forgot_password_selected(){
+    form_login.classList.remove('is-selected');
+    form_signup.classList.remove('is-selected');
+    form_forgot_password.classList.add('is-selected');
+  }
+
+  /*
+  //REMOVE THIS - it's just to show error messages 
+  form_login.find('input[type="submit"]').on('click', function(event){
+    event.preventDefault();
+    form_login.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
+  });
+  form_signup.find('input[type="submit"]').on('click', function(event){
+    event.preventDefault();
+    form_signup.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
+  });
+*/
 })

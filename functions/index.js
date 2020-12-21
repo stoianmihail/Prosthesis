@@ -25,9 +25,6 @@ app.route('/facility.ejs').get((req, res) => {
     let patients = JSON.parse(rawData)
     let gathered = []
     
-    console.log(patients)
-    console.log(facilities)
-    
     // Determine its partition
     for (var i = 0; i !== patients.length; ++i) {
       var p = patients[i];
@@ -36,26 +33,16 @@ app.route('/facility.ejs').get((req, res) => {
         var facility = facilities[j];
         var dist = Math.sqrt(Math.pow(p["coordinates"]["top"] - facility["coordinates"]["top"], 2) + Math.pow(p["coordinates"]["left"] - facility["coordinates"]["left"], 2));
         
-        console.log(minDist + " vs " + dist)
-        
         if (dist < minDist) {
           minDist = dist;
           chosen = j;
         }
       }
-      console.log(typeof chosen)
-      
-      console.log(typeof id)
-      console.log("last=" + chosen + " vs " + id)
       if (chosen === id) {
         gathered.push(patients[i])
       }
     }
-    
-    
-    
     gathered.sort((l, r) => { return (l.sum * r.total) > (r.sum * l.total) ? 1 : -1});
-    console.log(gathered)
     
     res.render('facility', {facility : facilities[id], data : gathered}); 
   } else {
