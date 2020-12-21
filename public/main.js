@@ -163,40 +163,80 @@ document.addEventListener('DOMContentLoaded', (event) => {
     loadFacilityId(parseInt(elem.id.split("_")[1]));
   }
   
-  var login = document.getElementById("login-button");
-  var form_modal = document.getElementById("user-modal");
-  var form_login = document.getElementById("login");
-  var form_signup = document.getElementById("signup");
-  var form_forgot_password = document.getElementById('reset-password');
-  var form_modal_tab = document.querySelector(".switcher");
-  var tab_login = document.getElementById("tab-sign-in");
-  var tab_signup = document.getElementById("tab-new-account");
-  var forgot_password_link = form_login.querySelector('.form-bottom-message a');
-  var back_to_login_link = form_forgot_password.querySelector('.form-bottom-message a');
+  var login = document.getElementById("login-button"),
+  form_modal = document.querySelector('.user-modal'),
+  form_login = document.getElementById('login'),
+  form_signup = document.getElementById('signup'),
+  form_forgot_password = form_modal.querySelector('#reset-password'),
+  form_modal_tab = document.querySelector('.switcher'),
+  tab_login = document.getElementById("tab-login"),
+  tab_signup = document.getElementById("tab-new-account"),
+  forgot_password_link = form_login.querySelector('.form-bottom-message a'),
+  back_to_login_link = form_forgot_password.querySelector('.form-bottom-message a');
 
-  //open modal
-  login.onclick = function(event){
-    console.log("butttton loggggggin");
-    form_modal.classList.add('is-visible'); 
-    //show the selected form
-    login_selected();
-    //( $(event.target).is('.signup') ) ? signup_selected() : login_selected();
+  function getAttributes(type) {
+    var dict = {}
+    dict["email"] = document.getElementById(type + "-email").value;
+    if (type !== "reset") {
+      dict["password"] = document.getElementById(type + "-password").value
+    }
+    if (type === "signup") {
+      dict["username"] = document.getElementById(type + "-username").value;
+    }
+    return dict;
+  }
+
+  function handleForm(type) {
+    var attr = getAttributes(type);
+    if (type === "signin") {
+      
+    }
   }
   
+  document.getElementById("sign-in-final").onclick = function(e) {
+    e.preventDefault();
+    handleForm("signin");
+    
+    // And remove the modal
+    form_modal.classList.remove('is-visible');
+  }
+
+  document.getElementById("sign-up-final").onclick = function(e) {
+    e.preventDefault();
+    handleForm("signup");
+
+    // And remove the modal
+    form_modal.classList.remove('is-visible');
+  }
+  
+  document.getElementById("reset-final").onclick = function(e) {
+    e.preventDefault();
+    handleForm("reset");      
+    
+    // And remove the modal
+    form_modal.classList.remove('is-visible');
+  }
+    
+  //open modal
+  login.onclick = function(event) {
+    console.log("test");
+    form_modal.classList.add('is-visible'); 
+    //show the selected form
+    ( $(event.target).is('.signup') ) ? signup_selected() : login_selected();
+  }
+
   //close modal
   document.querySelector('.user-modal').onclick = function(event){
-    console.log(event.target);
     if( $(event.target).is(form_modal) || $(event.target).is('.close-form') ) {
       form_modal.classList.remove('is-visible');
     } 
   }
-  
   //close modal when clicking the esc keyboard button
   document.onkeyup = function(event){
       if(event.which == '27'){
         form_modal.classList.remove('is-visible');
       }
-    }
+  };
 
   //switch from a tab to another
   form_modal_tab.onclick = function(event) {
@@ -205,15 +245,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
 
   //hide or show password
-  document.querySelector('.hide-password').onclick = function(){
-    console.log("in hide password");
-    var $this= $(this);
-    var password_field = $this.prev('input');
-    
-    ( 'password' == password_field.attr('type') ) ? password_field.attr('type', 'text') : password_field.attr('type', 'password');
-    ( 'Show' == $this.text() ) ? $this.text('Hide') : $this.text('Show');
-    //focus and move cursor to the end of input field
-    //password_field.putCursorAtEnd();
+  var hidePassword = document.querySelectorAll(".hide-password")
+  for (i = 0; i != hidePassword.length; i++) {
+    hidePassword[i].onclick = function(){
+      console.log("enter here");
+      var $this= $(this),
+        $password_field = $this.prev('input');
+      
+      ( 'password' == $password_field.attr('type') ) ? $password_field.attr('type', 'text') : $password_field.attr('type', 'password');
+      ( 'Show' == $this.text() ) ? $this.text('Hide') : $this.text('Show');
+      //focus and move cursor to the end of input field
+      //$password_field.putCursorAtEnd();
+    }
   }
 
   //show forgot-password form 
@@ -249,16 +292,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
     form_signup.classList.remove('is-selected');
     form_forgot_password.classList.add('is-selected');
   }
-
-  /*
-  //REMOVE THIS - it's just to show error messages 
-  form_login.find('input[type="submit"]').on('click', function(event){
-    event.preventDefault();
-    form_login.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
-  });
-  form_signup.find('input[type="submit"]').on('click', function(event){
-    event.preventDefault();
-    form_signup.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
-  });
-*/
 })
