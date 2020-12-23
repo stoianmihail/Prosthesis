@@ -28,7 +28,6 @@
 .green {
   color: green;
 }
-
 .split {
   height: 100%;
   width: 50%;
@@ -42,7 +41,6 @@
 .left {
   left:0;
   font-size: 15px;
-  background-color: #fefefa;
 }
 
 .right {

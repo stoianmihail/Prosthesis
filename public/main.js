@@ -2,6 +2,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var src = document.getElementById("pins")
   console.log(src)
   
+  // Set the configuration for the app
+  var config = {
+      apiKey: "AIzaSyBmQVIwwGgud9N7OXx-IE7jLWwd02XGD6s",
+      authDomain: "prosthesis-30783.firebaseapp.com",
+      databaseURL: "https://prosthesis-30783-default-rtdb.firebaseio.com",
+  };
+  firebase.initializeApp(config);
+
+  
+  //const preObject = document.getElementById("object");
+  const db = firebase.database().ref();
+  const auth = firebase.auth();
+  
+  /*
+  // Sync object changes
+  db.on('value', function(snap) {
+    console.log(snap.val());
+  });
+*/
+  // Get a reference to the database service
+  //var database = firebase.database();
+
+  
   /*
   var numPins = 0
   function loadPins() {
@@ -90,7 +113,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
           // View button
           var viewButton = document.createElement("button")
           viewButton.setAttribute("id", "button_" + i)
-          viewButton.className = 'viewButton'
+          viewButton.className = 'view'
           viewButton.setAttribute("onclick", "fetchFacilityId(this)");
           viewButton.textContent = 'View';
           span.appendChild(viewButton)
@@ -110,6 +133,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
           img.style.left = pin["coordinates"]["left"] + 'px'
           img.setAttribute("id", "pin_" + i);
           img.setAttribute("onmouseover", "mouseOver(this)");
+          img.setAttribute("onclick", "fetchFacilityId(this)");
           
           curr.appendChild(span)
           curr.appendChild(img)
@@ -164,6 +188,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
   
   var login = document.getElementById("login-button"),
+  logout = document.getElementById("logout-button"),
   form_modal = document.querySelector('.user-modal'),
   form_login = document.getElementById('login'),
   form_signup = document.getElementById('signup'),
@@ -174,6 +199,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   forgot_password_link = form_login.querySelector('.form-bottom-message a'),
   back_to_login_link = form_forgot_password.querySelector('.form-bottom-message a');
 
+  logout.classList.add('hide');
+  
   function getAttributes(type) {
     var dict = {}
     dict["email"] = document.getElementById(type + "-email").value;
@@ -188,10 +215,26 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   function handleForm(type) {
     var attr = getAttributes(type);
-    if (type === "signin") {
-      
+    if (type === "signup") {
+      const promise = auth.createUserWithEmailAndPassword(attr["email"], attr["password"]);
+      promise.catch(e => console.log(e.message));
+    } else if (type == "signin") {
+      const promise = auth.signInWithEmailAndPassword(attr["email"], attr["password"]);
+      promise.catch(e => console.log(e.message));
+    } else {
+      console.log("not supported!")
     }
   }
+  
+  auth.onAuthStateChanged(firebaseUser => {
+    if (firebaseUser) {
+      console.log(firebaseUser);
+      login.classList.add('hide');
+      logout.classList.remove('hide');
+    } else {
+      console.log("not logged in");
+    }
+  });
   
   document.getElementById("sign-in-final").onclick = function(e) {
     e.preventDefault();
@@ -219,10 +262,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
     
   //open modal
   login.onclick = function(event) {
-    console.log("test");
+    event.preventDefault();
     form_modal.classList.add('is-visible'); 
     //show the selected form
     ( $(event.target).is('.signup') ) ? signup_selected() : login_selected();
+  }
+
+  //open modal
+  logout.onclick = function(event) {
+    event.preventDefault();
+    auth.signOut();
+    login.classList.remove('hide');
+    logout.classList.add('hide');
   }
 
   //close modal
@@ -247,7 +298,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   //hide or show password
   var hidePassword = document.querySelectorAll(".hide-password")
   for (i = 0; i != hidePassword.length; i++) {
-    hidePassword[i].onclick = function(){
+    hidePassword[i].onclick = function(event) {
+      event.preventDefault();
       console.log("enter here");
       var $this= $(this),
         $password_field = $this.prev('input');
