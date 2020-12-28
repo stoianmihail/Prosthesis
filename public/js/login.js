@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   const auth = firebase.auth();
   
   var login = document.getElementById("login-button"),
+  menu = document.getElementById("umenu"),
   logout = document.getElementById("logout-button"),
   form_modal = document.querySelector('.user-modal'),
   form_login = document.getElementById('login'),
@@ -68,10 +69,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     if (firebaseUser) {
       console.log("uid" + firebaseUser.uid);
       login.classList.add('hide');
-      logout.classList.remove('hide');
+      menu.classList.remove('hide');
       fire(firebaseUser.uid);
     } else {
-      logout.classList.add('hide');
+      menu.classList.add('hide');
       login.classList.remove('hide');
     }
   });
@@ -113,7 +114,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     event.preventDefault();
     auth.signOut();
     login.classList.remove('hide');
-    logout.classList.add('hide');
+    menu.classList.add('hide');
   }
 
   //close modal

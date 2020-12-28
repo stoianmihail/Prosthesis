@@ -1,0 +1,91 @@
+.uinfo {
+  
+}
+.uinfo .login {
+  box-sizing: border-box;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: infer;
+  border: 1px solid #e74c3c;
+  /*border-radius: 0.6em;*/
+  color: #e74c3c;
+  cursor: pointer;
+  display: -webkit-box;
+  display: flex;
+  align-self: center;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  padding: 0.35em 2.0em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: 0.25s;
+}
+.uinfo .login:hover, .login:focus {
+  border-color: var(--hover);
+  color: #000;
+}
+.uinfo .third {
+  border-color: #3498db;
+  color: #fff;
+  box-shadow: 0 0 40px 40px #3498db inset, 0 0 0 0 #3498db;
+  -webkit-transition: all 150ms ease-in-out;
+  transition: all 150ms ease-in-out;
+}
+.uinfo .third:hover, .third:focus {
+    box-shadow: inset 0 0 0 2em var(--hover);
+}
+
+.uinfo .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.uinfo .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  width: 100%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.uinfo .dropdown-content a {
+  color: #444;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 16px;
+  display: block;
+}
+
+.uinfo .dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.uinfo .dropdown-content a::before {
+  content: '';
+  display: block;
+  height: 5px;
+  background-color: #000;
+
+  position: absolute;
+  top: 0;
+  width: 0%;
+
+  transition: all ease-in-out 250ms;
+}
+
+.uinfo .dropdown-content a:hover::before {
+  width: 100%;
+}
+
+.uinfo .dropdown:hover .dropdown-content {display: block;}
+
+.uinfo .dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+.uinfo .hide {
+  display:none
+}

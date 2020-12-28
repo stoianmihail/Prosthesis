@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/menu.css">
     <script src='https://www.gstatic.com/firebasejs/live/3.1/firebase.js'></script>
     <script src="js/login.js"></script>
     <script type="text/javascript" src="main.js"></script>
@@ -21,7 +21,18 @@
         <li><a href="/about.html">About</a></li>
         <li><a href="/donate.html">Donate</a></li>
         <li><a href="/contact.html">Contact</a></li>
-        <li><button class="login third" id="login-button">Login</button><button class="login third" id="logout-button">Logout</button></li>
+        <li>
+          <div class="uinfo">
+            <button class="login third" id="login-button">Login</button>
+            <div class="dropdown" id="umenu">
+              <button class="login third">username</button>
+              <div class="dropdown-content">
+                <a href="#">Donations</a>
+                <a id="logout-button">Logout</a>
+              </div>
+            </div>
+          </div>
+        </li>
       </ul>
     </nav>
 </header>
