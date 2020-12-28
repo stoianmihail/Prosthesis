@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   
   var login = document.getElementById("login-button"),
   menu = document.getElementById("umenu"),
+  ubutton = document.getElementById("ubutton"),
   logout = document.getElementById("logout-button"),
   form_modal = document.querySelector('.user-modal'),
   form_login = document.getElementById('login'),
@@ -50,17 +51,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
   
   function fire(uid) {
+    console.log("uid=" + uid)
     db.child("users/" + uid).once("value", snapshot => {
       if (snapshot.exists()){
         const userData = snapshot.val();
-        console.log("exists!", userData);
+        const n = userData.username;
+        ubutton.innerHTML = n;
+        console.log("exists!");
       } else {
         if (username === null) {
           console.log("No username found!");
+        } else {
+          db.child("users/" + uid).set({
+            username: username
+          });
+          ubutton.innerHTML = username;
         }
-        db.child("users/" + uid).set({
-          username: username
-        });
       }
     });
   }

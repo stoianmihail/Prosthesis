@@ -26,7 +26,7 @@
         <!-- THEME STYLES -->
         <link href="css/layout.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/case.css" rel="stylesheet" type="text/css"/>
-        <link href="css/button.css" rel="stylesheet" type="text/css"/>
+        <link href="css/menu.css" rel="stylesheet" type="text/css"/>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="favicon.ico"/>
@@ -46,7 +46,18 @@
             <li><a href="/about.html">About</a></li>
             <li><a href="/donate.html">Donate</a></li>
             <li><a href="/contact.html">Contact</a></li>
-            <li><button class="login third" id="login-button">Login</button><button class="login third" id="logout-button">Logout</button></li>
+            <li>
+            <div class="uinfo">
+                <button class="login third" id="login-button">Login</button>
+                <div class="dropdown" id="umenu">
+                <button class="login third" id="ubutton">username</button>
+                <div class="dropdown-content">
+                    <a href="#">Donations</a>
+                    <a id="logout-button">Logout</a>
+                </div>
+                </div>
+            </div>
+            </li>
         </ul>
       </nav>
     </header>
@@ -88,8 +99,16 @@
         </div> <!-- split left -->
         
         <div class="split right">
-            <p><input type="number" class="mydonation" id="donation" value = "" onfocus="this.placeholder='Donation'"/></p>
-            <a class="donation" id="button" onclick="executeDonation()">Donate</a>
+            <div class="dnt">
+                <div class="number-input">
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                    <input class="quantity" min="0" name="quantity" value="1" type="number" id="donation">
+                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                </div>
+                <div>
+                    <button class="button" id="button">Donate</button>
+                </div>
+            </div>
         </div>
         
         <div class="user-modal">
