@@ -1,12 +1,4 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-  // Set the configuration for the app
-  var config = {
-      apiKey: "AIzaSyBmQVIwwGgud9N7OXx-IE7jLWwd02XGD6s",
-      authDomain: "prosthesis-30783.firebaseapp.com",
-      databaseURL: "https://prosthesis-30783-default-rtdb.firebaseio.com",
-  };
-  firebase.initializeApp(config);
-  
   var tmp = JSON.parse(currentData);
   console.log(tmp);
   
@@ -16,73 +8,45 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var ratio = document.getElementById("ratio");
 
   function initProgressBar() {
-    const db = firebase.database().ref().child("patients");
-    const child = db.child(tmp.id);
-    var onlyOnce = 0;
-    child.once("value", function(snapshot) {
-      onlyOnce++;
-      console.log("enters again");
-      if (onlyOnce > 1)
-        return;
+    console.log("id=" + tmp.id);
+    const db = firebase.database().ref().child('patients/' + String(tmp.id));
+    db.on("value", function(snapshot) {
       var sum = snapshot.val().sum;
       var total = snapshot.val().total;
       var newRatio = 1.0 * sum / total;
-      
-      console.log("newRatio=" + newRatio);
-    
       ratio.innerHTML = String(parseInt(newRatio * 100)) + '%';
       progressBar.style.width = ratio.innerHTML;
       progressBar.setAttribute('data-width', parseInt(newRatio * 100));
-    }, function (errorObject) {
-      console.log("The read failed: " + errorObject.code);
+    }, function (error) {
+      console.log("Error: " + error.code);
     });
   }
 
   initProgressBar();
   
-  console.log(ratio.innerHTML);
-  
   button.onclick = function(e) {
     e.preventDefault();
     console.log(donation.value);
-    const db = firebase.database().ref().child("patients");
-    const child = db.child(tmp.id);
+    const db = firebase.database().ref().child("patients/" + tmp.id);
     
+    // Trigger this only once
     var onlyOnce = 0;
-    child.once("value", function(snapshot) {
-      onlyOnce++;
-      console.log("enters again");
-      if (onlyOnce > 1)
+    db.on("value", function(snapshot) {
+      if (onlyOnce > 0)
         return;
+      onlyOnce++;
+      
+      // And write
       var sum = snapshot.val().sum + parseInt(donation.value);
       var total = snapshot.val().total;
-      child.update({
+      db.update({
         sum: sum
       });
       
-      var newRatio = 1.0 * sum / total;
-      ratio.innerHTML = String(parseInt(newRatio * 100)) + '%';
-      progressBar.style.width = ratio.innerHTML;
-      progressBar.setAttribute('data-width', parseInt(newRatio * 100));
+      // The progress bar will be updated automatically
     }, function (errorObject) {
       console.log("The read failed: " + errorObject.code);
     });
   }
-  
-  
-  /*
-  const auth = firebase.auth();
-  var user = auth.currentUser;
-  
-  var login = document.getElementById("login-button"), logout = document.getElementById("logout-button");
-  if (user) {
-    console.log("ISSS")
-    login.classList.add('hide');
-    logout.classList.remove('hide');
-  } else {
-    console.log("NOT")
-    logout.classList.add('hide');
-    login.classList.remove('hide');
-  }*/
 });
 

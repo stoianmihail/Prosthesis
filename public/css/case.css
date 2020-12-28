@@ -1,10 +1,83 @@
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+header {
+    font-family: 'Poppins', sans-serif;
+	-webkit-background-size: cover;
+	background-size: cover;
+	background-position: center center;
+	position: relative;
+}
+header::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+body {
+	font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+  &.modal-active {
+    overflow: hidden;
+  }    
+}
+
+nav {
+  float: right;
+  margin-right: 5%;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+  margin-left: 70px;
+  padding-top: 20px;
+  position: relative;
+}
+
+nav a {
+  color: #444;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+nav a:hover {
+  color: #000;
+}
+
+nav a::before {
+  content: '';
+  display: block;
+  height: 5px;
+  background-color: #444;
+
+  position: absolute;
+  top: 0;
+  width: 0%;
+
+  transition: all ease-in-out 250ms;
+}
+
+nav a:hover::before {
+  width: 100%;
+}
+
 .split {
   height: 100%;
   position: fixed;
   z-index: 1;
   top: 0;
   overflow-x: hidden;
-  padding-top: 20px;
 }
 
 .left {
@@ -14,6 +87,7 @@
 }
 
 .right {
+  padding-top: 20px;
   right: 0;
   width: 25%;
   background-color: #d6492b;

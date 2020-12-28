@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en">
     <!-- BEGIN HEAD -->
     <head>
         <meta charset="utf-8"/>
@@ -9,7 +9,9 @@
         <meta content="" name="description"/>
         <meta content="" name="author"/>
 
+        <script src="js/login.js"></script>
         <script src='https://www.gstatic.com/firebasejs/live/3.1/firebase.js'></script>
+        <script src="js/case.js" type="text/javascript"></script>
     
         <!-- GLOBAL MANDATORY STYLES -->
         <link href="http://fonts.googleapis.com/css?family=Hind:300,400,500,600,700" rel="stylesheet" type="text/css">
@@ -17,12 +19,14 @@
         <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     
         <!-- PAGE LEVEL PLUGIN STYLES -->
+        <link href="css/login.css" rel="stylesheet">
         <link href="css/animate.css" rel="stylesheet">
         <link href="vendor/swiper/css/swiper.min.css" rel="stylesheet" type="text/css"/>
         
         <!-- THEME STYLES -->
         <link href="css/layout.min.css" rel="stylesheet" type="text/css"/>
         <link href="css/case.css" rel="stylesheet" type="text/css"/>
+        <link href="css/button.css" rel="stylesheet" type="text/css"/>
 
         <!-- Favicon -->
         <link rel="shortcut icon" href="favicon.ico"/>
@@ -35,7 +39,18 @@
     <!-- BODY -->
     <body id="body" data-spy="scroll" data-target=".header">
     <div class="split left">
-
+    <header>
+      <nav>
+        <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/donate.html">Donate</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+            <li><button class="login third" id="login-button">Login</button><button class="login third" id="logout-button">Logout</button></li>
+        </ul>
+      </nav>
+    </header>
+    
         <!--========== PAGE LAYOUT ==========-->
         <!-- About -->
         <div id="about">
@@ -58,9 +73,9 @@
                         <h2>Donation</h2>
                         <!-- Progress Box -->
                         <div class="progress-box">
-                            <h5><span class="color-heading pull-right" id="ratio">87%</span></h5>
+                            <h5><span class="color-heading pull-right" id="ratio"></span></h5>
                             <div class="progress">
-                                <div class="progress-bar bg-color-base" role="progressbar" id="progressBar" data-width="87"></div>
+                                <div class="progress-bar bg-color-base" role="progressbar" id="progressBar" data-width=""></div>
                             </div>
                         </div>
                         <!-- End Progress Box -->
@@ -77,6 +92,98 @@
             <a class="donation" id="button" onclick="executeDonation()">Donate</a>
         </div>
         
+        <div class="user-modal">
+  <div class="user-modal-container">
+    <ul class="switcher">
+      <li><a href="#0" id="tab-login">Sign in</a></li>
+      <li><a href="#0" id="tab-new-account">Sign up</a></li>
+    </ul>
+
+    <div id="login">
+      <form class="form">
+        <p class="fieldset">
+          <label class="image-replace email" for="signin-email">E-mail</label>
+          <input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
+          <span class="error-message">An account with this email address does not exist!</span>
+        </p>
+
+        <p class="fieldset">
+          <label class="image-replace password" for="signin-password">Password</label>
+          <input class="full-width has-padding has-border" id="signin-password" type="password"  placeholder="Password">
+          <a class="hide-password">Show</a>
+          <span class="error-message">Wrong password! Try again.</span>
+        </p>
+
+        <p class="fieldset">
+          <input type="checkbox" id="remember-me" checked>
+          <label for="remember-me">Remember me</label>
+        </p>
+
+        <p class="fieldset">
+          <input class="full-width" type="submit" value="Login" id="sign-in-final">
+        </p>
+      </form>
+      
+      <p class="form-bottom-message"><a href="#0">Forgot your password?</a></p>
+      <!-- <a href="#0" class="close-form">Close</a> -->
+    </div>
+
+    <div id="signup">
+      <form class="form">
+        <p class="fieldset">
+          <label class="image-replace username" for="signup-username">Username</label>
+          <input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username">
+          <span class="error-message">Your username can only contain numeric and alphabetic symbols!</span>
+        </p>
+
+        <p class="fieldset">
+          <label class="image-replace email" for="signup-email">E-mail</label>
+          <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
+          <span class="error-message">Enter a valid email address!</span>
+        </p>
+
+        <p class="fieldset">
+          <label class="image-replace password" for="signup-password">Password</label>
+          <input class="full-width has-padding has-border" id="signup-password" type="password"  placeholder="Password">
+          <a class="hide-password">Show</a>
+          <span class="error-message">Your password has to be at least 6 characters long!</span>
+        </p>
+
+        <p class="fieldset">
+          <input type="checkbox" id="accept-terms">
+          <label for="accept-terms">I agree to the <a class="accept-terms" href="#0">Terms</a></label>
+        </p>
+
+        <p class="fieldset">
+          <input class="full-width has-padding" type="submit" value="Create account" id="sign-up-final">
+        </p>
+      </form>
+
+				<!-- <a href="#0" class="cd-close-form">Close</a> -->
+    </div>
+
+    <div id="reset-password">
+      <p class="form-message">Lost your password? Please enter your email address.</br> You will receive a link to create a new password.</p>
+
+      <form class="form">
+        <p class="fieldset">
+          <label class="image-replace email" for="reset-email">E-mail</label>
+          <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
+          <span class="error-message">An account with this email does not exist!</span>
+        </p>
+
+        <p class="fieldset">
+          <input class="full-width has-padding" type="submit" value="Reset password" id="reset-final">
+        </p>
+      </form>
+
+      <p class="form-bottom-message"><a href="#0">Back to log-in</a></p>
+    </div>
+      <a href="#0" class="close-form">Close</a>
+  </div>
+</div>
+
+        
         <!-- End About -->
             
         <!--========== END PAGE LAYOUT ==========-->
@@ -91,7 +198,6 @@
         <script src="vendor/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 
         <!-- PAGE LEVEL PLUGINS -->
-        <script src="js/case.js" type="text/javascript"></script>
         <script src="vendor/jquery.easing.js" type="text/javascript"></script>
         <script src="vendor/jquery.back-to-top.js" type="text/javascript"></script>
         <script src="vendor/jquery.smooth-scroll.js" type="text/javascript"></script>
