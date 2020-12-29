@@ -1,12 +1,21 @@
 const functions = require('firebase-functions');
+var admin = require('firebase-admin');
 const path = require('path');
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
-var express = require('express')
-var app = express()
+var express = require('express');
+var app = express();
 
 app.set('view engine', 'ejs');
+
+var config = {
+  apiKey: "AIzaSyBmQVIwwGgud9N7OXx-IE7jLWwd02XGD6s",
+  authDomain: "prosthesis-30783.firebaseapp.com",
+  databaseURL: "https://prosthesis-30783-default-rtdb.firebaseio.com",
+};
+
+admin.initializeApp(config);
 
 app.route('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html'));
@@ -17,34 +26,8 @@ app.route('/facility.ejs').get((req, res) => {
   console.log(queryObject)
   if (queryObject.id) {
     var id = parseInt(queryObject.id);
-    console.log(queryObject.id);
-    
-    let rawData = fs.readFileSync(path.join(__dirname, '/db/facility.json'));
-    let facilities = JSON.parse(rawData);
-    rawData = fs.readFileSync(path.join(__dirname, '/db/patient.json'));
-    let patients = JSON.parse(rawData)
-    let gathered = []
-    
-    // Determine its partition
-    for (var i = 0; i !== patients.length; ++i) {
-      var p = patients[i];
-      var minDist = Number.POSITIVE_INFINITY, chosen = -1;
-      for (var j = 0; j !== facilities.length; ++j) {
-        var facility = facilities[j];
-        var dist = Math.sqrt(Math.pow(p["coordinates"]["top"] - facility["coordinates"]["top"], 2) + Math.pow(p["coordinates"]["left"] - facility["coordinates"]["left"], 2));
-        
-        if (dist < minDist) {
-          minDist = dist;
-          chosen = j;
-        }
-      }
-      if (chosen === id) {
-        gathered.push(patients[i])
-      }
-    }
-    gathered.sort((l, r) => { return (l.sum * r.total) > (r.sum * l.total) ? 1 : -1});
-    
-    res.render('facility', {facility : facilities[id], data : gathered}); 
+    var data = {id : queryObject.id} 
+    res.render('facility', {data : data}); 
   } else {
     res.status(404).send('<h1> Page not found </h1>');
   }
@@ -55,7 +38,7 @@ app.route('/case.ejs').get((req, res) => {
   console.log(queryObject)
   if (queryObject.id) {
     console.log(queryObject.id)
-    var data = {name : 'Test', id : queryObject.id} 
+    var data = {id : queryObject.id} 
     res.render('case', {data : data}); 
   } else {
     res.status(404).send('<h1> Page not found </h1>');

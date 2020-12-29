@@ -8,17 +8,21 @@
   <link rel='stylesheet' href='https://rsms.me/inter/inter-ui.css?v=3.2'>
   <link rel="stylesheet" href="../css/ranking.css">
   <link rel="stylesheet" href="../css/facility.css">
+  <script src='https://www.gstatic.com/firebasejs/live/3.1/firebase.js'></script>
   <script>
   function goBack() {
     window.history.back();
   }
+  </script>
+  <script>
+    var currentData = '<%- JSON.stringify(data) %>'; // 'data' is now a valid js object
   </script>
 </head>
 <body>
 
 <div class="split left">
     <div>
-        <img src='../<%=facility.img%>' class="center"></img>
+        <!--<img src='..' class="center" id="facility-img"></img>-->
     </div>
     <div class="desc">
     <p>
@@ -35,19 +39,10 @@
         <h1>Current Life Stories</h1>
         </div>
         <div class="list__body">
-        <table class="list__table">
+        <table class="list__table" id="custom-table">
         <tr>
-        <th>#</th><th>Name</th><th>Donated</th><th>Missing</th>
+        <th>#</th><th>Name</th><th>Collected</th><th>Missing</th>
         </tr>
-          <%
-            for(var i=0; i < data.length; i++) { %>
-              <tr class="list__row" data-image=<%=data[i].img%>>
-              <td class="list__cell"><span class="list__value black"><%=(i+1)%></span></td>
-              <td class="list__cell"><span class="list__value"><%=data[i].name%></span><small class="list__label"></small></td>
-              <td class="list__cell"><span class="list__value green"><%=(data[i].sum/data[i].total).toFixed(2)%>%</span><small class="list__label"></small></td>
-              <td class="list__cell"><span class="list__value red">- <%=data[i].total - data[i].sum%>$</span><small class="list__label"></small></td>
-            </tr>
-          <% } %>
         </table>
         </div>
     </div>
@@ -69,6 +64,6 @@
 </div>
 <!-- partial -->
   <script  src="../js/ranking.js"></script>
-
+  <script  src="../js/facility.js"></script>
 </body>
 </html>
