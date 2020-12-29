@@ -9,12 +9,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   function initProgressBar() {
     console.log("id=" + tmp.id);
-    const db = firebase.database().ref().child('patients/' + String(tmp.id));
+    const db = firebase.database().ref().child('patients/' + tmp.id);
     db.on("value", function(snapshot) {
       var sum = snapshot.val().sum;
       var total = snapshot.val().total;
-      var newRatio = 1.0 * sum / total;
-      ratio.innerHTML = String(parseInt(newRatio * 100)) + '%';
+      var newRatio = (1.0 * sum / total);
+      ratio.innerHTML = String(parseInt(newRatio.toFixed(2) * 100)) + '%';
       progressBar.style.width = ratio.innerHTML;
       progressBar.setAttribute('data-width', parseInt(newRatio * 100));
     }, function (error) {
@@ -29,12 +29,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const db = firebase.database().ref().child("patients/" + tmp.id);
   
     // Trigger it only once
-    var onlyOnce = 0;
-    db.on("value", function(snapshot) {
-      if (onlyOnce > 0)
-        return;
-      onlyOnce++;
-      
+    db.once("value", function(snapshot) {
       // And write
       var sum = snapshot.val().sum + parseInt(donation.value);
       var total = snapshot.val().total;
