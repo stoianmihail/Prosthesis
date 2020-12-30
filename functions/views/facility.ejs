@@ -10,9 +10,6 @@
   <link rel="stylesheet" href="../css/facility.css">
   <script src='https://www.gstatic.com/firebasejs/live/3.1/firebase.js'></script>
   <script>
-    function goBack() {
-      window.history.back();
-    }
     var currentData = '<%- JSON.stringify(data) %>'; // 'data' is now a valid js object
   </script>
 </head>
@@ -38,9 +35,7 @@
         </div>
         <div class="list__body">
           <table class="list__table" id="custom-table">
-            <tr>
-              <th>#</th><th>Name</th><th>Collected</th><th>Missing</th>
-            </tr>
+            <tr><th>#</th><th>Name</th><th>Collected</th><th>Missing</th></tr>
           </table>
         </div>
       </div>

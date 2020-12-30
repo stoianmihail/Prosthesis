@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var login = document.getElementById("login-button"),
   menu = document.getElementById("umenu"),
   ubutton = document.getElementById("ubutton"),
+  myDonations = document.getElementById("mydonations-button"),
   logout = document.getElementById("logout-button"),
   form_modal = document.querySelector('.user-modal'),
   form_login = document.getElementById('login'),
@@ -72,6 +73,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
   
   auth.onAuthStateChanged(firebaseUser => {
+    console.log("inside!")
     if (firebaseUser) {
       console.log("uid" + firebaseUser.uid);
       login.classList.add('hide');
@@ -107,42 +109,49 @@ document.addEventListener('DOMContentLoaded', (event) => {
     form_modal.classList.remove('is-visible');
   }
     
-  //open modal
+  // Open modal
   login.onclick = function(event) {
     event.preventDefault();
     form_modal.classList.add('is-visible'); 
-    //show the selected form
+    // Show the selected form
     ( $(event.target).is('.signup') ) ? signup_selected() : login_selected();
   }
 
-  //open modal
+  // Open modal
   logout.onclick = function(event) {
     event.preventDefault();
     auth.signOut();
     login.classList.remove('hide');
     menu.classList.add('hide');
+    
+    // Check if the user wants to logout on the 'mydonations'-webpage
+    var url = document.createElement('a');
+    url.href = window.name;
+    if (url.pathname === "/mydonations.ejs")
+      window.location = "/about.html"
   }
 
-  //close modal
+  // Close modal
   document.querySelector('.user-modal').onclick = function(event){
     if( $(event.target).is(form_modal) || $(event.target).is('.close-form') ) {
       form_modal.classList.remove('is-visible');
     } 
   }
-  //close modal when clicking the esc keyboard button
+  
+  // Close modal when clicking the esc keyboard button
   document.onkeyup = function(event){
       if(event.which == '27'){
         form_modal.classList.remove('is-visible');
       }
   };
 
-  //switch from a tab to another
+  // Switch from a tab to another
   form_modal_tab.onclick = function(event) {
     event.preventDefault();
     ( $(event.target).is( tab_login ) ) ? login_selected() : signup_selected();
   }
 
-  //hide or show password
+  // Hide or show password
   var hidePassword = document.querySelectorAll(".hide-password")
   for (i = 0; i != hidePassword.length; i++) {
     hidePassword[i].onclick = function(event) {
@@ -153,18 +162,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
       
       ( 'password' == $password_field.attr('type') ) ? $password_field.attr('type', 'text') : $password_field.attr('type', 'password');
       ( 'Show' == $this.text() ) ? $this.text('Hide') : $this.text('Show');
-      //focus and move cursor to the end of input field
-      //$password_field.putCursorAtEnd();
+      // focus and move cursor to the end of input field
+      // $password_field.putCursorAtEnd();
     }
   }
 
-  //show forgot-password form 
+  // Show forgot-password form 
   forgot_password_link.onclick = function(event){
     event.preventDefault();
     forgot_password_selected();
   }
 
-  //back to login from the forgot-password form
+  // Back to login from the forgot-password form
   back_to_login_link.onclick = function(event){
     event.preventDefault();
     login_selected();
@@ -190,5 +199,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     form_login.classList.remove('is-selected');
     form_signup.classList.remove('is-selected');
     form_forgot_password.classList.add('is-selected');
+  }
+  
+  myDonations.onclick = function(event) {
+    event.preventDefault();
+    auth.onAuthStateChanged(firebaseUser => {
+      if (firebaseUser) {
+        window.location = '/mydonations.ejs?id=' + firebaseUser.uid;
+      }
+    });
   }
 });

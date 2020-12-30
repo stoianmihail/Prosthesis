@@ -21,6 +21,18 @@ app.route('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html'));
 });
 
+app.route('/mydonations.ejs').get((req, res) => {
+  const queryObject = url.parse(req.url, true).query;
+  console.log(queryObject)
+  if (queryObject.id) {
+    var id = parseInt(queryObject.id);
+    var data = {id : queryObject.id} 
+    res.render('mydonations', {data : data}); 
+  } else {
+    res.status(404).send('<h1> Page not found </h1>');
+  }
+});
+
 app.route('/facility.ejs').get((req, res) => {
   const queryObject = url.parse(req.url, true).query;
   console.log(queryObject)
