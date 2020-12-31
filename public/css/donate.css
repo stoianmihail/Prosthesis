@@ -1,5 +1,5 @@
 :root {
-  --black: #21252a;
+  --black:	#21252a;
   --grey-1: #343A40;
   --grey-2: #495057;
   --grey-3: #868E96;
@@ -119,15 +119,10 @@ nav a:hover::before {
   font-size: 16px;
 }
 
-.center {
-  margin-left: 25%;
-}
-
 .list {
   width: 100%;
   max-width: 600px;
-  margin: 3rem auto 3rem;
-  border-radius: .4rem;
+  border-radius: 0.4rem;
   box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.1), 0px 5px 12px rgba(0, 0, 0, 0.07);
 }
 @media screen and (max-width: 800px) {
@@ -144,15 +139,15 @@ nav a:hover::before {
 .list__header {
   padding: 3rem 2rem;
   background: white;
-  border-top-left-radius: .4rem;
-  border-top-right-radius: .4rem;
+  border-top-left-radius: 0.4rem;
+  border-top-right-radius: 0.4rem;
 }
 .list__header h1, .list__header h5 {
   margin: 0;
   padding: 0;
 }
 .list__header h5 {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   text-transform: uppercase;
   color: var(--red);
 }
@@ -160,10 +155,9 @@ nav a:hover::before {
   display: block;
   font-size: 18px;
 }
-
 .list__label {
   font-size: 18px;
-  opacity: .6;
+  opacity: 0.6;
 }
 .list__row {
   color: var(--gold-dark);
@@ -184,17 +178,6 @@ nav a:hover::before {
   background: var(--grey-9);
   box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.08);
 }
-
-/*
-.list__row:first-of-type {
-  color: var(--gold-dark);
-  background: var(--grey-9);
-}
-.list__row:first-of-type .list__cell:first-of-type {
-  background: var(--gold);
-  color: var(--gold-dark);
-}
-*/
 .list__cell {
   padding: 1rem;
 }
@@ -214,7 +197,6 @@ nav a:hover::before {
   background: var(--trans-black);
   display: none;
   cursor: pointer;
-  -webkit-transition: all 300ms ease;
   transition: all 300ms ease;
 }
 .overlay.is-open {
@@ -230,34 +212,25 @@ nav a:hover::before {
   bottom: 0;
   box-shadow: none;
   right: -500px;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-          flex-direction: column;
-  -webkit-box-pack: start;
-          justify-content: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
   /*@media screen and (max-width: 650px) {
   	flex-direction: column-reverse;
   	justify-content: space-between;
   }*/
-  -webkit-transition: all 300ms ease;
   transition: all 300ms ease;
 }
 .sidebar.is-open {
   right: 0;
-  -webkit-transition: all 300ms ease;
   transition: all 300ms ease;
   box-shadow: 0px 0px 100px var(--black);
 }
 .sidebar__header {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   background: var(--grey-9);
-  -webkit-box-align: center;
-          align-items: center;
+  align-items: center;
 }
 .sidebar__header, .sidebar__body {
   padding: 2rem;
@@ -289,10 +262,8 @@ nav a:hover::before {
 }
 
 .driver {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-align: start;
-          align-items: flex-start;
+  align-items: flex-start;
   opacity: 0;
   position: relative;
   left: 100px;
@@ -326,7 +297,7 @@ nav a:hover::before {
   color: var(--grey-4);
 }
 .driver__table td {
-  padding: .3rem .6rem .3rem 0;
+  padding: 0.3rem 0.6rem 0.3rem 0;
   height: 2rem;
 }
 .driver__table td img {
@@ -355,19 +326,38 @@ nav a:hover::before {
   }
 }
 
-.list__table .progress-box .progress {
-  box-shadow: none;
-  height: 3px;
+.donate {
+  position: relative;
+  margin: auto;
+  text-align: center;
 }
 
-.list__table .progress-box .progress-bar {
-  transition-duration: 2000ms;
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.7, 1, 0.7, 1);
+.donate .btn {
+  position: relative;
+  border: none;
+  border-radius: 45px;
+  text-align: center;
+  padding: 5px;
+  
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #FF0000;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.08),
+              0 2px 2px rgba(0,0,0,0.08), 
+              0 4px 4px rgba(0,0,0,0.08), 
+              0 8px 8px rgba(0,0,0,0.08);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
 }
 
-.desc {
-  margin-left: 5%;
-  margin-right: 5%;
-  text-align: center; 
+.donate .btn:hover {
+  background-color: #2EE59D;
+  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+  color: #fff;
+  transform: translateY(-5px);
 }

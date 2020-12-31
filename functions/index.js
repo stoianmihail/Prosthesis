@@ -21,6 +21,10 @@ app.route('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/index.html'));
 });
 
+app.route('/donate.ejs').get((req, res) => {  
+  res.render('donate', {});
+});
+
 app.route('/mydonations.ejs').get((req, res) => {
   const queryObject = url.parse(req.url, true).query;
   console.log(queryObject)

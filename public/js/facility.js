@@ -1,11 +1,4 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-  var config = {
-    apiKey: "AIzaSyBmQVIwwGgud9N7OXx-IE7jLWwd02XGD6s",
-    authDomain: "prosthesis-30783.firebaseapp.com",
-    databaseURL: "https://prosthesis-30783-default-rtdb.firebaseio.com",
-  };
-  firebase.initializeApp(config);
-  
   // Fetch the facility id from the html page
   var tmp = JSON.parse(currentData);
   var facilityId = parseInt(tmp.id);
