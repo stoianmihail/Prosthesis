@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var patientId = parseInt(tmp.id);
   console.log(tmp);
   
+  var img = document.getElementById("case-img");
+  var name = document.getElementById("case-name");
   var button = document.getElementById("button");
   var donation = document.getElementById("donation");
   var progressBar = document.getElementById("progressBar");
@@ -12,12 +14,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     console.log("id=" + patientId);
     const db = firebase.database().ref().child('patients/' + patientId);
     db.on("value", function(snapshot) {
+      img.src = snapshot.val().img;
+      name.innerHTML = snapshot.val().name;
       var sum = snapshot.val().sum;
       var total = snapshot.val().total;
       var newRatio = (1.0 * sum / total);
-      ratio.innerHTML = String(parseInt(newRatio.toFixed(2) * 100)) + '%';
+      ratio.innerHTML = String(newRatio.toFixed(2) * 100) + '%';
       progressBar.style.width = ratio.innerHTML;
-      progressBar.setAttribute('data-width', parseInt(newRatio * 100));
+      progressBar.setAttribute('data-width', newRatio * 100);
     }, function (err) {
       console.log("Error: " + err.code);
     });
