@@ -28,63 +28,33 @@ document.addEventListener('DOMContentLoaded', (event) => {
     sidebarClose();
   });
   
-  let gatherPatients = new Promise((resolve, reject) => {
-    const db = firebase.database().ref();
-    var gathered = []
-
-    db.child('facilities').once('value', snapshot1 => {
-      // If the facility doesn't exist
-      if (facilityId >= snapshot1.val().length)
-        return;
-      
-      // Update the image of the facility
-      var facilities = snapshot1.val();
-      facilityImg.src = facilities[facilityId].img;
-      
-      // Find clusters
-      db.child('patients').once('value', snapshot2 => {
-        var patients = snapshot2.val();
-        snapshot2.forEach(patient => {
-          var p = patient.val();
-          var minDist = Number.POSITIVE_INFINITY, chosen = -1;
-          for (var index = 0; index != facilities.length; ++index) {
-            var facility = facilities[index];
-            var dist = Math.sqrt(Math.pow(p["coordinates"]["top"] - facility["coordinates"]["top"], 2) + Math.pow(p["coordinates"]["left"] - facility["coordinates"]["left"], 2));
-              
-            // Take the minimum distance and update the cluster id
-            if (dist < minDist) {
-              minDist = dist;
-              chosen = index;
-            }
-          }
-          if (chosen === facilityId) {
-            gathered.push(patient.key);
-          }
-        });
-        resolve(gathered);
-      }, function (err) {
-        reject(err.code);
+  const db = firebase.database().ref();
+  db.child('facilities/' + facilityId + '/cluster').on('value', snap => {
+    // Collect the cluster
+    var gathered = snap.val();
+    
+    // Build up the set of the cluster elements
+    let cluster = new Set();
+    for (var index = 0; index !== gathered.length; ++index)
+      cluster.add(gathered[index]);
+    
+    var customTable = document.getElementById("custom-table");
+    customTable.innerHTML = `<tr><th>#</th><th>Name</th><th>Collected</th><th>Missing</th></tr>`;
+    db.child("patients").on("value", currSnap => {
+      // Collect
+      var tmp = []
+      currSnap.forEach(patient => {
+        if (cluster.has(parseInt(patient.key)))
+          tmp.push({key : parseInt(patient.key), val : patient.val()});
       });
-    }, function (err) {
-      reject(err.code);
-    });
-  });
-  
-  let initCustomTable = new Promise((resolve, reject) => {
-    gatherPatients.then(gathered => {
-      /*
-        <tr class="list__row" data-image=<%=data[i].img%>>
-          <td class="list__cell"><span class="list__value black"><%=(i+1)%></span></td>
-          <td class="list__cell"><span class="list__value"><%=data[i].name%></span></td>
-          <td class="list__cell"><span class="list__value green"><%=(data[i].sum/data[i].total).toFixed(2)%>%</td>
-          <td class="list__cell"><span class="list__value red">- <%=data[i].total - data[i].sum%>$</span></td>
-        </tr>
-      */
-      console.log(gathered);
-      var customTable = document.getElementById("custom-table");
-      for (var index = 0; index !== gathered.length; ++index) {
+      
+      // And sort
+      tmp.sort((l, r) => { return (l.val.sum * r.val.total) > (r.val.sum * l.val.total) ? 1 : -1});
+    
+      for (var index = 0; index !== tmp.length; ++index) {
         // The image
         var tr = document.createElement("tr");
+        tr.setAttribute("data-id", tmp[index].key);
         tr.setAttribute("id", "tr_" + index);
         tr.className = "list__row";
         
@@ -96,7 +66,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         span1.innerHTML = String(index + 1);
         span1.className = "list__value black";
         td1.appendChild(span1);
-         
+        
         // The name
         var td2 = document.createElement("td");
         td2.className = "list__cell"
@@ -129,7 +99,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         customTable.appendChild(tr);
         
         // Add the listener
-        tr.addEventListener("click", function () {
+        tr.onclick = function (e) {
+           e.preventDefault();
+        
+          // Fetch the id
+          let currId = this.dataset.id;
+          
           overlay.style.opacity = 0;
           overlay.classList.add("is-open");
           sidebar.classList.add("is-open");
@@ -163,53 +138,75 @@ document.addEventListener('DOMContentLoaded', (event) => {
           driverTitle.classList = 'driver__title';
           driverTitle.innerHTML = driverName;
           driverContent.appendChild(driverTitle);
-
+          
           const driverInfo = document.createElement('div');
-          driverInfo.innerHTML = `
-              <table class="driver__table">
-                  <tbody>
-                      <tr>
-                          <td><small>Missing</small></td>
-                          <td style="color: red;">${driverTeam}</td>
-                      </tr>
-                  </tbody>
-              </table>`;
+          var tmpTable = document.createElement("table");
+          tmpTable.className = 'driver__table';
+          var tbody = document.createElement("tbody");
+          var tr = document.createElement("tr");
+          
+          var td1 = document.createElement("td");
+          var small = document.createElement("small");
+          small.innerHTML = `Missing`;
+          td1.appendChild(small);
+          
+          var td2 = document.createElement("td");
+          td2.style.color = "red";
+          td2.innerHTML = driverTeam;
+          tr.appendChild(td1);
+          tr.appendChild(td2);
+          tbody.appendChild(tr);
+          
+          var donateDiv = document.createElement("div");
+          donateDiv.className = 'donate';
+          
+          var viewButton = document.createElement("btn");
+          viewButton.setAttribute('id', 'view_' + currId);
+          viewButton.className = 'btn';
+          viewButton.style.backgroundColor = '#74d5dd';
+          viewButton.innerHTML = `View`;
+          
+          var donateButton = document.createElement("btn");
+          donateButton.setAttribute('id', 'donate_' + currId);
+          donateButton.className = 'btn';
+          donateButton.innerHTML = `Donate`;
+          
+          donateDiv.appendChild(viewButton);
+          donateDiv.appendChild(document.createTextNode("\u00A0"));
+          donateDiv.appendChild(document.createTextNode("\u00A0"));
+          donateDiv.appendChild(document.createTextNode("\u00A0"));
+          donateDiv.appendChild(document.createTextNode("\u00A0"));
+          donateDiv.appendChild(donateButton);
+          
+          
+          tmpTable.appendChild(tbody);
+          tmpTable.appendChild(donateDiv);
+          driverInfo.appendChild(tmpTable);
+          
+          // And add the listeners
+          viewButton.onclick = function(e) {
+            e.preventDefault();
+            window.location = '/case.ejs?id=' + currId;
+          }
+          donateButton.onclick = function(e) {
+            e.preventDefault();
+            window.location = '/case.ejs?id=' + currId;
+          }
+          
           driverContent.appendChild(driverInfo);
-
           newDriver.appendChild(driverContent);
           sidebarBody.appendChild(newDriver);
-        });
-      }
-      resolve(gathered);
-    });
-  });
-  
-  let cluster = new Set();
-  function initPage() {
-    initCustomTable.then(gathered => {
-      const db = firebase.database().ref();
-      for (var index = 0; index !== gathered.length; ++index)
-        cluster.add(gathered[index]);
-      db.child("patients").on("value", snap => {
-        var tmp = []
-        snap.forEach(patient => {
-          if (cluster.has(patient.key)) {
-            tmp.push(patient.val());
-          }
-        });
-        
-        tmp.sort((l, r) => { return (l.sum * r.total) > (r.sum * l.total) ? 1 : -1});
-      
-        for (var index = 0; index !== tmp.length; ++index) {
-          document.getElementById("tr_" + index).setAttribute("data-image", tmp[index].img);
-          document.getElementById("span2_" + index).innerHTML = tmp[index].name;
-          document.getElementById("span3_" + index).innerHTML = String(((1.0 * tmp[index].sum / tmp[index].total) * 100).toFixed(2)) + '%';
-          document.getElementById("span4_" + index).innerHTML = '-' + (tmp[index].total - tmp[index].sum) + '$';
         }
-      });
+            
+        // And set the values
+        document.getElementById("tr_" + index).setAttribute("data-image", tmp[index].val.img);
+        document.getElementById("span2_" + index).innerHTML = tmp[index].val.name;
+        document.getElementById("span3_" + index).innerHTML = String(((1.0 * tmp[index].val.sum / tmp[index].val.total) * 100).toFixed(2)) + '%';
+        document.getElementById("span4_" + index).innerHTML = '-' + (tmp[index].val.total - tmp[index].val.sum) + '$';
+      }
     });
-  }
-  
-  initPage();
+  }, function(err) {
+    console.log("Error: " + err.code);
+  });
 });
 

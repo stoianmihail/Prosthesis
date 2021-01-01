@@ -33,6 +33,7 @@
   box-sizing: border-box;
 }
 header {
+  font-family: 'Poppins', sans-serif;	
   -webkit-background-size: cover;
   background-size: cover;
   background-color: #fff;
@@ -45,6 +46,7 @@ header::after {
   clear: both;
 }
 body {
+    font-family: 'Poppins', sans-serif;
     background-color: #f0e1b9ff;
     overflow: hidden;
   &.modal-active {
@@ -53,50 +55,7 @@ body {
 }
 
 nav {
-  float: right;
-  margin-right: 10%;
   margin-bottom: 1%;
-}
-
-nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-nav li {
-  display: inline-block;
-  margin-left: 70px;
-  padding-top: 20px;
-  position: relative;
-}
-
-nav a {
-  color: #444;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 16px;
-}
-
-nav a:hover {
-  color: #000;
-}
-
-nav a::before {
-  content: '';
-  display: block;
-  height: 5px;
-  background-color: #444;
-
-  position: absolute;
-  top: 0;
-  width: 0%;
-
-  transition: all ease-in-out 250ms;
-}
-
-nav a:hover::before {
-  width: 100%;
 }
 
 .split {

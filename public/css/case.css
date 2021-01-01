@@ -12,6 +12,7 @@ header {
 	background-size: cover;
 	background-position: center center;
 	position: relative;
+    z-index: 5;
 }
 header::after {
   content: '';
