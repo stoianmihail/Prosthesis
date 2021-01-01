@@ -31,6 +31,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   const db = firebase.database().ref();
   db.child('facilities/' + facilityId + '/cluster').on('value', snap => {
     // Collect the cluster
+    if (!snap.exists())
+      return;
     var gathered = snap.val();
     
     // Build up the set of the cluster elements
