@@ -28,7 +28,8 @@ body {
 
 nav {
   float: right;
-  margin-right: 5%;
+  margin-right: 10%;
+  margin-bottom: 1%;
 }
 
 nav ul {
@@ -74,10 +75,11 @@ nav a:hover::before {
 
 .split {
   height: 100%;
+  width: 50%;
   position: fixed;
   z-index: 1;
-  top: 0;
   overflow-x: hidden;
+  padding-top: 20px;
 }
 
 .left {
@@ -87,12 +89,14 @@ nav a:hover::before {
 }
 
 .right {
-  padding-top: 20px;
   right: 0;
   width: 25%;
   background-color: #f0e1b9ff;
   font-size: 16px;
-  text-align: center;
+}
+
+.center {
+  margin-left: 25%;
 }
 
 .dnt {
