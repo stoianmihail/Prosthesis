@@ -58,8 +58,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		if (printError(address, "", "address")) return;
 		if (printError(currentFiles.length, 0, "file")) return;
 		
-		
-																												
 		var fileObject = currentFiles[0];
 		console.log("inside=" + fileObject.name);
 		
@@ -86,29 +84,27 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				var left = parseInt(tmp[0]);
 				var top = parseInt(tmp[1]);
 				
-				const db = firebase.database().ref();
-				db.child('facilities').once("value", snap => {
+				firebase.database().ref().child('facilities').once('value', snap => {
 					var min = Infinity, chosen = -1;
 					snap.forEach(facility => {
-						let fl = parseInt(facility.val().coordinates.left);
-						let ft = parseInt(facility.val().coordinates.top);
-						let dist = Math.sqrt((fl - left)**2 + (ft - top)**2);
-						
+						let coords = facility.val().coordinates;
+						let dist = Math.sqrt((coords["left"] - left)**2 + (coords["top"] - top)**2);
 						if (dist < min) {
 							min = dist;
 							chosen = facility.key;
 						}
 					});
-					
-					db.child('facilities/' + chosen + '/queue').push().set({
+						
+					var estimatedCost = 50 + min * 0.5;
+					firebase.database().ref().child('queue').push().set({
 						name: name,
+						cost: estimatedCost,
+						facility: chosen,
 						coordinates: {left : left, top : top},
 						file: newName
 					});
-					
-					alert("The order has been processed!\nOne of our prosthetists will analyze it as soon as possible!\n");
 				}, err => {
-					console.log("Error: " + err);
+					console.log('Error: ' + err);
 				});
 			}
 		);

@@ -214,9 +214,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
   myDonations.onclick = function(event) {
     event.preventDefault();
     auth.onAuthStateChanged(firebaseUser => {
-      if (firebaseUser) {
+      if (firebaseUser)
         window.location = '/mydonations.ejs?id=' + firebaseUser.uid;
-      }
     });
+  }
+  
+  orders.onclick = function(event) {
+    event.preventDefault();
+		window.location = '/pending.html';
   }
 });

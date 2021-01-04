@@ -2,20 +2,17 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Prosthesis - My Donations</title>
+  <title>Prosthesis - Pending Orders</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel='stylesheet' href='https://rsms.me/inter/inter-ui.css?v=3.2'>
   <link href="css/nav.css" rel="stylesheet" type="text/css"/>
-  <link href="css/mydonations.css" rel="stylesheet" type="text/css"/>
+  <link href="css/pending.css" rel="stylesheet" type="text/css"/>
   <link href="css/menu.css" rel="stylesheet" type="text/css"/>
   <link href="css/login.css" rel="stylesheet">
   <script src='https://www.gstatic.com/firebasejs/live/3.1/firebase.js'></script>
   <script src="js/login.js"></script>
-  <script src="js/mydonations.js"></script>
-  <script>
-    var currentData = '<%- JSON.stringify(data) %>'; // 'data' is now a valid js object
-  </script>
+  <script src="js/pending.js"></script>
 </head>
 <body>
 <header>
@@ -46,12 +43,11 @@
 <div class="wrapper">
   <div class="list">
     <div class="list__header">
-      <h5 id="total"></h5>
-      <h1>My Donations</h1>
+      <h1>Pending Orders</h1>
     </div>
     <div class="list__body">
-      <table class="list__table" id="donations">
-        <tr><th>#</th><th>Name</th><th>Collected</th><th>Missing</th><th>My Donation</th></tr>
+      <table class="list__table" id="orders">
+        <tr><th>#</th><th>Name</th><th>Estimated Cost</th></tr>
       </table>
     </div>
   </div>
@@ -59,7 +55,7 @@
 <div class="overlay"></div>
 <div class="sidebar">
   <div class="sidebar__header">
-    <div class="sidebar__title">Life Story</div>
+    <div class="sidebar__title">Order</div>
     <button class="button button--close">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <circle cx="12" cy="12" r="10"></circle>
