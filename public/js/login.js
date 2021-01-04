@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var login = document.getElementById("login-button"),
   menu = document.getElementById("umenu"),
   ubutton = document.getElementById("ubutton"),
+	orders = document.getElementById("orders-button"),
   myDonations = document.getElementById("mydonations-button"),
   logout = document.getElementById("logout-button"),
   form_modal = document.querySelector('.user-modal'),
@@ -31,41 +32,50 @@ document.addEventListener('DOMContentLoaded', (event) => {
       dict["password"] = document.getElementById(type + "-password").value
     }
     if (type === "signup") {
+			dict["isDoctor"] = (document.getElementById("accept-terms").value === "on");
       dict["username"] = document.getElementById(type + "-username").value;
     }
     return dict;
   }
 
-  var username = null;
+  var username = null, isDoctor = null;
   function handleForm(type) {
     var attr = getAttributes(type);
     if (type === "signup") {
       username = attr["username"];
+			isDoctor = attr["isDoctor"];
       const promise = auth.createUserWithEmailAndPassword(attr["email"], attr["password"]);
       promise.catch(e => console.log(e.message));
     } else if (type === "signin") {
       const promise = auth.signInWithEmailAndPassword(attr["email"], attr["password"]);
       promise.catch(e => console.log(e.message));
     } else {
-      console.log("not supported!")
+      console.log("Not supported!")
     }
   }
   
   function fire(uid) {
     console.log("uid=" + uid)
     db.child("users/" + uid).once("value", snapshot => {
-      if (snapshot.exists()){
+      if (snapshot.exists()) {
+				// Does the user exist?
         const userData = snapshot.val();
         const n = userData.username;
-        ubutton.innerHTML = n;
-        console.log("exists!");
+        
+				// Hide or show the orders
+				const isDoctor = userData.isDoctor;
+				orders.style.display = isDoctor ? "block" : "none";
+				ubutton.innerHTML = n;
       } else {
-        if (username === null) {
-          console.log("No username found!");
+				// Sign up? Check for username
+        if ((username === null) || (isDoctor === null)) {
+          console.log("No 'username' or 'isDoctor' found!");
         } else {
           db.child("users/" + uid).set({
-            username: username
+            username: username,
+						isDoctor: isDoctor
           });
+					orders.style.display = isDoctor ? "block" : "none";
           ubutton.innerHTML = username;
         }
       }

@@ -95,8 +95,8 @@
   margin-bottom: 0;
 }
 .form label {
-  font-size: 14px;
-  font-size: 0.875rem;
+  font-size: 16px;
+  font-size: 1rem;
 }
 .form label.image-replace {
   /* replace text with an icon */
