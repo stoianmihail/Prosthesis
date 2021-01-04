@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Neomorphic Form</title>
+  <link rel='stylesheet' href='https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css'>
+	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:500,700&amp;display=swap'>
+	<link rel="stylesheet" href="css/order.css">
+	<script src='https://www.gstatic.com/firebasejs/live/3.1/firebase.js'></script>
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<form>
+  
+  <div class="segment">
+    <h1>Order a Prosthesis</h1>
+  </div>
+  
+  <label>
+		<p>Full name</p>
+    <input type="text" placeholder="Name"/>
+  </label>
+  <label>
+		<p>Address (needed for care)</p>
+    <input type="text" placeholder="Address"/>
+  </label>
+  <p>Photo of amputation</p>
+	<div id='container'>
+		<input type='file' id='file-input' hidden>
+		<button id="selector">Upload a file</button>
+		<p>Preview</p>
+		<img id='preview'>
+	</div>
+	<div id="container">
+		<progress value="0" max="100" id="uploader">0%</progress>
+		<button class="red" type="button" id="submitter">Submit</button>
+	</div>
+</form>
+<!-- partial -->
+	<script  src="js/order.js"></script>
+</body>
+</html>
