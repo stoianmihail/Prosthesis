@@ -243,6 +243,7 @@ nav {
   padding: 0.3rem 0.6rem 0.3rem 0;
   height: 2rem;
 }
+
 .driver__table td img {
   position: relative;
   top: 5px;
@@ -304,7 +305,7 @@ nav {
 }
 
 img {
-	margin-top: 10%;
-  border: 1px solid #ddd;
+	max-width: calc(100% - 10px);
+  margin-top: 20px;
   border-radius: 5px;
 }

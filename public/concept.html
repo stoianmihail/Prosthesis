@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Concept</title>
+  <link rel='stylesheet' href='https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css'>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/nav.css">
@@ -14,12 +15,12 @@
   <script type="text/javascript" src="js/concept.js"></script>
   <script type="text/javascript" src="js/login.js"></script>
 </head>
-<header>
+<header id="header">
   <nav>
     <ul>
         <li><a href="/index.html">Home</a></li>
-        <li><a href="/about.html">About</a></li>
         <li><a href="/concept.html">Concept</a></li>
+        <li><a href="/about.html">About</a></li>
         <li><a href="/donate.html">Donate</a></li>
         <li><a href="/contact.html">Contact</a></li>
         <li>
@@ -135,45 +136,118 @@
 </div>
 
 
-<article class="wrapper">
+<article class="wrapper" id="art0">
   <header>
     <h1 class="pageTitle">Our Concept</h1>
-    <h2 class="pageSubTitle">With a little bit of jQuery</h2>
+    <h2 class="pageSubTitle">WHY WE DO IT</h2>
   </header>
   <section>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat tortor a turpis mattis, in blandit orci venenatis. Quisque justo lacus, rutrum mattis tortor et, aliquam auctor risus. Mauris quis elit turpis. Morbi non nisl nunc. Duis elit quam, lobortis eget pretium sed, eleifend eu dui. Sed molestie ornare suscipit. Phasellus facilisis at quam sed tincidunt. Phasellus eget odio laoreet, dictum augue ac, dictum lorem. Nulla facilisi. Phasellus elit augue, cursus eu ante nec, vestibulum adipiscing mi. Nunc adipiscing nibh risus, sed auctor sapien sodales in. Morbi in purus diam. In id consequat velit, eget sodales enim. Nam a massa sed orci blandit interdum eget et ligula. Pellentesque laoreet semper vulputate.</p>
-
-    <p>Proin laoreet molestie mi ac mattis. Curabitur velit lorem, euismod eget leo sed, imperdiet ullamcorper mauris. Fusce posuere dapibus eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper massa lectus, et tempor orci dapibus non. Pellentesque id enim commodo, scelerisque augue in, pharetra purus. Donec leo odio, consequat non tellus tincidunt, rhoncus porta urna.</p>
-
-    <p>Aenean tincidunt sed metus et mollis. Pellentesque tristique risus ac suscipit ornare. Sed a tempor nisl. Nam imperdiet mauris vel nunc varius, id volutpat elit porta. Etiam eu consectetur dui. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean sollicitudin fermentum nulla, eu ultricies orci imperdiet sed. Cras vitae quam blandit quam volutpat tincidunt vel vel quam. Ut id dictum nisl, nec commodo augue. Donec sed imperdiet arcu, nec ullamcorper ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis id egestas est. Pellentesque eleifend, nisi quis eleifend blandit, lacus ligula tempus quam, non sagittis eros tortor vel massa. Duis posuere pellentesque arcu in sollicitudin.</p>
+		<p>As our name implies, our goal is to develop an innovative and cheap prosthesis that will enable us to provide many people with below the knee prostheses. At the moment, we are focusing on implementing our concept in Indonesia, but we also plan to include other countries in the global south. This is because only 5-15% of people with amputations there have access to a proper prosthesis. Therefore, when we developed our concept, we put a lot of value on a simple, fast and affordable design, which can still guarantee high quality. To achieve this, our concept is based on four areas: 
+		<ol style="padding-left: 10%;">
+			<li>Contacting a cooperating facility</li>
+			<li>Financing the prosthesis</li>
+			<li>Manufacturing the prosthesis</li>
+			<li>Prosthesis maintenance</li>
+		</ol> 
+		</p>
   </section>
+</article>
+
+<article class="wrapper" id="art1">
+  <header>
+    <h1 class="pageTitle">STEP 1</h1>
+    <h2 class="pageSubTitle">Contacting a cooperating facility</h2>
+  </header>
+  <section>
+    <p>You are from Indonesia, need a prosthesis, have a low income and therefore want to become part of our project? No problem! The first step is to contact one of our cooperating facilities. Several experts from the fields of orthopaedic technology, medical and mechanical engineering work there to manufacture your individual prosthesis directly on site. We currently have three cooperating facilities in Indonesia. For more information and to become part of our programme, please contact the nearest facility.</p>
+    
+    <form>
+			<label>
+				<p>Which is the nearest facility?</p>
+				<input type="text" placeholder="My address" id="addr"/><button class="red" type="button" id="submitter">Find</button>
+			</label>
+		</form>
+		<div class="donate">
+			<img src="./images/indonesia.png" alt="Map" class="box" id="map">
+		</div>
+		<div id="pins">
+		</div>
+		</section>
 </article>
 
 <article class="wrapper">
   <header>
-    <h1 class="pageTitle">Another title</h1>
-    <h2 class="pageSubTitle">With just another subtitle</h2>
+    <h1 class="pageTitle">STEP 2</h1>
+    <h2 class="pageSubTitle">FINANCING THE PROSTHESIS</h2>
   </header>
   <section>
-    <p>Proin laoreet molestie mi ac mattis. Curabitur velit lorem, euismod eget leo sed, imperdiet ullamcorper mauris. Fusce posuere dapibus eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper massa lectus, et tempor orci dapibus non. Pellentesque id enim commodo, scelerisque augue in, pharetra purus. Donec leo odio, consequat non tellus tincidunt, rhoncus porta urna.</p>
-
-    <p>Aenean tincidunt sed metus et mollis. Pellentesque tristique risus ac suscipit ornare. Sed a tempor nisl. Nam imperdiet mauris vel nunc varius, id volutpat elit porta. Etiam eu consectetur dui. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean sollicitudin fermentum nulla, eu ultricies orci imperdiet sed. Cras vitae quam blandit quam volutpat tincidunt vel vel quam. Ut id dictum nisl, nec commodo augue. Donec sed imperdiet arcu, nec ullamcorper ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis id egestas est. Pellentesque eleifend, nisi quis eleifend blandit, lacus ligula tempus quam, non sagittis eros tortor vel massa. Duis posuere pellentesque arcu in sollicitudin.</p>
+    <p>Due to the low income of most people in Indonesia and beyond in most countries of the global south, our concept is based on fundraising. This means that 100% of the cost of a prosthesis is financed through donations and that patients with an amputation do not have to pay any costs themselves.</p>
+    
+    <p>As soon as a patient has contacted one of our cooperating facilities and becomes part of our programme, his or her name and/or identification number, as well as other personal information, if desired, are visible on our website. From this point on, donations can be made explicitly for this patient to receive his or her custom-made prosthesis. Alternatively, donations can be made for material & equipment costs, as well as additional costs such as rent, electricity, salary etc. If one cannot decide, there is also the possibility of a "Quick Donation". Here, the donated money is distributed and spent by our project group according to need.</p>
+    
+    <p>You would like to donate?
+    Click here:</p>
+    <div style="margin-bottom: 10%; margin-top: -5%; display: flex; justify-content: center;"><button class="btn" onclick="window.location = 'donate.html';">Donate</button></div>
   </section>
+</article>
+
+
+<article class="wrapper">
+  <header>
+    <h1 class="pageTitle">STEP 3</h1>
+    <h2 class="pageSubTitle">MANUFACTURING THE PROSTHESIS</h2>
+  </header>
+  <section>
+    <p>Our prosthesis consists of five components: 
+			<ul style="padding-left: 5%;">
+				<li>Liner
+				<ul style="padding-left: 5%;">
+					<li>Protective cover which is worn over the residual limb to reduce movement and chafing between skin and socket</li>
+				</ul>
+				</li>
+				<li>Socket
+					<ul style="padding-left: 5%;">
+						<li>Central interface between residual limb and prosthesis</li>
+						<li>Transfers force to prosthesis</li>
+					</ul>
+				</li>
+				<li>Foot
+					<ul style="padding-left: 5%;">
+						<li>Mimics the function of a normal foot</li>
+						<li>Must absorb impacts</li>
+					</ul>
+				</li>
+				<li>Connecting tube
+					<ul style="padding-left: 5%;">
+						<li>Connecting link between socket and foot</li>
+					</ul>
+				</li>
+				<li>Fastening system
+					<ul style="padding-left: 5%;">
+						<li>Fixes connecting tube to foot and socket</li>
+						<li>Prevents rotational movements of the two in relation to each other</li>
+					</ul>
+				</li>
+			</ul>
+		</p>
+		
+		<p>In order to keep the costs as well as the workload and -time as low as possible, we have decided not to make the liner and foot individually for each patient. However, to be able to guarantee the best possible custom made prosthesis, both products are available in three different sizes. The choice of the right size depends on the age and size of the patient, but also on the shape of the residual limb and many other factors. We produce liners and feet in large quantities and provide them to our cooperating facilities on site. The right size is then selected individually there. We also produce the fastening system and the connecting tube as a mass product and provide this to our partners. We produce the connecting tube as a kind of yard goods, which can be cut to the right length by our specialists. Unlike the other elements of our prosthesis, the socket is produced directly in Indonesia. It is the most critical part of the prosthesis and must therefore be individually adapted to the patient and the shape of his or her residual limb. In order to reduce time and material costs here as well and to keep the technical aids low, we do not use a conventional plaster impression and create a digital 3D model of the residual limb with the help of pictures. For this, the specialists only have to take photos of the stump from the different perspectives. These photos are then superimposed, and a three-dimensional model of the stump is generated. After scaling, the 3D model can be further processed, and surrounding structures can be removed. The socket and the socket rim can then be shaped based on this model. Once this step is complete, the socket can be printed directly on site using the 3D printers provided.</p>
+		
+		<p>When the socket has the right fit and all the necessary parts are available, the prosthesis can be assembled, and further adjustments can be made if necessary.</p>
+	</section>
 </article>
 
 <article class="wrapper">
   <header>
-    <h1 class="pageTitle">Again another title</h1>
-    <h2 class="pageSubTitle">And again another subtitle</h2>
+    <h1 class="pageTitle">STEP 4</h1>
+    <h2 class="pageSubTitle">PROSTHESIS MAINTENANCE</h2>
   </header>
   <section>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec volutpat tortor a turpis mattis, in blandit orci venenatis. Quisque justo lacus, rutrum mattis tortor et, aliquam auctor risus. Mauris quis elit turpis. Morbi non nisl nunc. Duis elit quam, lobortis eget pretium sed, eleifend eu dui. Sed molestie ornare suscipit. Phasellus facilisis at quam sed tincidunt. Phasellus eget odio laoreet, dictum augue ac, dictum lorem. Nulla facilisi. Phasellus elit augue, cursus eu ante nec, vestibulum adipiscing mi. Nunc adipiscing nibh risus, sed auctor sapien sodales in. Morbi in purus diam. In id consequat velit, eget sodales enim. Nam a massa sed orci blandit interdum eget et ligula. Pellentesque laoreet semper vulputate.</p>
-
-    <p>Proin laoreet molestie mi ac mattis. Curabitur velit lorem, euismod eget leo sed, imperdiet ullamcorper mauris. Fusce posuere dapibus eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper massa lectus, et tempor orci dapibus non. Pellentesque id enim commodo, scelerisque augue in, pharetra purus. Donec leo odio, consequat non tellus tincidunt, rhoncus porta urna.</p>
-
-    <p>Aenean tincidunt sed metus et mollis. Pellentesque tristique risus ac suscipit ornare. Sed a tempor nisl. Nam imperdiet mauris vel nunc varius, id volutpat elit porta. Etiam eu consectetur dui. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean sollicitudin fermentum nulla, eu ultricies orci imperdiet sed. Cras vitae quam blandit quam volutpat tincidunt vel vel quam. Ut id dictum nisl, nec commodo augue. Donec sed imperdiet arcu, nec ullamcorper ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis id egestas est. Pellentesque eleifend, nisi quis eleifend blandit, lacus ligula tempus quam, non sagittis eros tortor vel massa. Duis posuere pellentesque arcu in sollicitudin.</p>
+    <p>In case the prosthesis or a part of it is defective or adjustments need to be made, this can also be repaired or implemented by one of our cooperating facilities. Thanks to the modular design of our prosthesis, each part can be replaced individually. This not only reduces costs but also material usage and at the same time ensures a long useful life of the prosthesis. To ensure that the maintenance costs do not have to be covered by the patients themselves, the facilities can also add these costs to our homepage. In this way the required amount can be raised through donations..</p>
   </section>
 </article>
+
+
 <!-- partial -->
 </body>
 </html>

@@ -1,12 +1,4 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-	var config = {
-		apiKey: "AIzaSyBmQVIwwGgud9N7OXx-IE7jLWwd02XGD6s",
-		authDomain: "prosthesis-30783.firebaseapp.com",
-		databaseURL: "https://prosthesis-30783-default-rtdb.firebaseio.com",
-		storageBucket: "prosthesis-30783.appspot.com"  
-	};
-	firebase.initializeApp(config);
-
 	var input = document.querySelector("#file-input");
 	document.getElementById("selector").addEventListener("click", function (e) {
 		e.preventDefault();
@@ -96,6 +88,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 					});
 						
 					var estimatedCost = 50 + min * 0.5;
+					
+					console.log("whatttttttttttttttt");
+					
 					firebase.database().ref().child('queue').push().set({
 						name: name,
 						cost: estimatedCost,

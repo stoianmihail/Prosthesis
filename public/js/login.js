@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       apiKey: "AIzaSyBmQVIwwGgud9N7OXx-IE7jLWwd02XGD6s",
       authDomain: "prosthesis-30783.firebaseapp.com",
       databaseURL: "https://prosthesis-30783-default-rtdb.firebaseio.com",
+			storageBucket: "prosthesis-30783.appspot.com"  
   };
   firebase.initializeApp(config);
 

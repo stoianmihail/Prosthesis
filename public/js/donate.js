@@ -193,5 +193,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }, function(err) {
     console.log("Error: " + err.code);
   });
+	
+	var quickDonate = document.getElementById("quick");
+	var donation = document.getElementById("donation");
+	quickDonate.onclick = function(e) {
+    e.preventDefault();
+    if (donation.value == "") {
+      console.log("Error: no donation found!")
+    } else {
+      console.log(donation.value);
+      var donationAmount = parseInt(donation.value);
+    }
+  }
 });
 

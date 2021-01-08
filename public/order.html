@@ -6,9 +6,135 @@
   <link rel='stylesheet' href='https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css'>
 	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:500,700&amp;display=swap'>
 	<link rel="stylesheet" href="css/order.css">
+	<link href="css/nav.css" rel="stylesheet">
+  <link href="css/menu.css" rel="stylesheet">
+  <link href="css/login.css" rel="stylesheet">
+  <link href="css/list.css" rel="stylesheet">
 	<script src='https://www.gstatic.com/firebasejs/live/3.1/firebase.js'></script>
+	<script src="js/login.js"></script>
+	<script  src="js/order.js"></script>
 </head>
+<header>
+  <nav>
+    <ul>
+        <li><a href="/index.html">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/concept.html">Concept</a></li>
+        <li><a href="/donate.html">Donate</a></li>
+        <li><a href="/order.html">Order</a></li>
+        <li><a href="/contact.html">Contact</a></li>
+        <li>
+          <div class="uinfo">
+              <button class="login third" id="login-button">Login</button>
+              <div class="dropdown" id="umenu">
+              <button class="login third" id="ubutton">username</button>
+              <div class="dropdown-content">
+									<a id="orders-button">Pending Orders</a>
+                  <a id="mydonations-button">Donations</a>
+                  <a id="logout-button">Logout</a>
+              </div>
+              </div>
+          </div>
+        </li>
+    </ul>
+  </nav>
+</header>
 <body>
+
+
+<div class="user-modal">
+    <div class="user-modal-container">
+      <ul class="switcher">
+        <li><a href="#0" id="tab-login">Sign in</a></li>
+        <li><a href="#0" id="tab-new-account">Sign up</a></li>
+      </ul>
+
+      <div id="login">
+        <form class="form">
+          <p class="fieldset">
+            <label class="image-replace email" for="signin-email">E-mail</label>
+            <input class="full-width has-padding has-border" id="signin-email" type="email" placeholder="E-mail">
+            <span class="error-message">An account with this email address does not exist!</span>
+          </p>
+
+          <p class="fieldset">
+            <label class="image-replace password" for="signin-password">Password</label>
+            <input class="full-width has-padding has-border" id="signin-password" type="password"  placeholder="Password">
+            <a class="hide-password">Show</a>
+            <span class="error-message">Wrong password! Try again.</span>
+          </p>
+
+          <p class="fieldset">
+            <input type="checkbox" id="remember-me" checked>
+            <label for="remember-me">Remember me</label>
+          </p>
+
+          <p class="fieldset">
+            <input class="full-width" type="submit" value="Login" id="sign-in-final">
+          </p>
+        </form>
+        
+        <p class="form-bottom-message"><a href="#0">Forgot your password?</a></p>
+        <!-- <a href="#0" class="close-form">Close</a> -->
+      </div>
+
+      <div id="signup">
+        <form class="form">
+          <p class="fieldset">
+            <label class="image-replace username" for="signup-username">Username</label>
+            <input class="full-width has-padding has-border" id="signup-username" type="text" placeholder="Username">
+            <span class="error-message">Your username can only contain numeric and alphabetic symbols!</span>
+          </p>
+
+          <p class="fieldset">
+            <label class="image-replace email" for="signup-email">E-mail</label>
+            <input class="full-width has-padding has-border" id="signup-email" type="email" placeholder="E-mail">
+            <span class="error-message">Enter a valid email address!</span>
+          </p>
+
+          <p class="fieldset">
+            <label class="image-replace password" for="signup-password">Password</label>
+            <input class="full-width has-padding has-border" id="signup-password" type="password"  placeholder="Password">
+            <a class="hide-password">Show</a>
+            <span class="error-message">Your password has to be at least 6 characters long!</span>
+          </p>
+
+          <p class="fieldset">
+            <input type="checkbox" id="accept-terms">
+            <label for="accept-terms">I agree to the <a class="accept-terms" href="#0">Terms</a></label>
+          </p>
+
+          <p class="fieldset">
+            <input class="full-width has-padding" type="submit" value="Create account" id="sign-up-final">
+          </p>
+        </form>
+
+                  <!-- <a href="#0" class="cd-close-form">Close</a> -->
+      </div>
+
+      <div id="reset-password">
+        <p class="form-message">Lost your password? Please enter your email address.</br> You will receive a link to create a new password.</p>
+
+        <form class="form">
+          <p class="fieldset">
+            <label class="image-replace email" for="reset-email">E-mail</label>
+            <input class="full-width has-padding has-border" id="reset-email" type="email" placeholder="E-mail">
+            <span class="error-message">An account with this email does not exist!</span>
+          </p>
+
+          <p class="fieldset">
+            <input class="full-width has-padding" type="submit" value="Reset password" id="reset-final">
+          </p>
+        </form>
+
+        <p class="form-bottom-message"><a href="#0">Back to log-in</a></p>
+      </div>
+        <a href="#0" class="close-form">Close</a>
+    </div>
+  </div>
+
+
+
 <!-- partial:index.partial.html -->
 <form>
   
@@ -36,7 +162,5 @@
 		<button class="red" type="button" id="submitter">Submit</button>
 	</div>
 </form>
-<!-- partial -->
-	<script  src="js/order.js"></script>
 </body>
 </html>

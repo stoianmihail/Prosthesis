@@ -6,11 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel='stylesheet' href='https://rsms.me/inter/inter-ui.css?v=3.2'>
-  <!--<link rel="stylesheet" href="css/mydonations.css">-->
   <link href="css/nav.css" rel="stylesheet">
   <link href="css/menu.css" rel="stylesheet">
   <link href="css/login.css" rel="stylesheet">
   <link href="css/donate.css" rel="stylesheet">
+  <link href="css/list.css" rel="stylesheet">
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
   <script src='https://www.gstatic.com/firebasejs/live/3.1/firebase.js'></script>
   <script src="js/login.js"></script>
@@ -20,8 +20,8 @@
   <nav>
     <ul>
         <li><a href="/index.html">Home</a></li>
-        <li><a href="/about.html">About</a></li>
         <li><a href="/concept.html">Concept</a></li>
+        <li><a href="/about.html">About</a></li>
         <li><a href="/donate.html">Donate</a></li>
         <li><a href="/contact.html">Contact</a></li>
         <li>
@@ -135,6 +135,28 @@
 
 
 <div class="split left">
+	<ol class="checklist">
+		<h2 class="headline">Donate through:<br>1) 'Quick Donation'<br>2) 'Choose a Life Story'</h2>
+		<li class="checkitem">
+			<h2 class="headline">New 3D Printer</h2><span>We rely on 3D printers to expand our network.</span>
+		</li>
+		<li class="checkitem">
+			<h2 class="headline">Raw Materials</h2><span>The stock of materials should always be full.</span>
+		</li>
+		<li class="checkitem">
+			<h2 class="headline">Rent</h2><span>Without the monthly rents, the facilities would stop working.</span>
+		</li>
+	</ol>
+	<div class="dnt">
+		<div class="number-input">
+			<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+			<input class="quantity" min="0" name="quantity" value="1" type="number" id="donation">
+			<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+		</div>
+		<div>
+			<button class="button" id="quick">Quick Donation</button>
+		</div>
+	</div>
 </div>
 
 <!-- partial:index.partial.html -->
@@ -143,7 +165,7 @@
     <div class="list">
       <div class="list__header">
         <h5>OUR PATIENTS</h5>
-        <h1>Current Life Stories</h1>
+        <h1>Current People</h1>
       </div>
       <div class="list__body">
         <table class="list__table" id="custom-table">
@@ -155,7 +177,7 @@
   <div class="overlay"></div>
   <div class="sidebar">
     <div class="sidebar__header">
-      <div class="sidebar__title">Life Story</div>
+      <div class="sidebar__title">Patient</div>
       <button class="button button--close">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="10"></circle>

@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       var tr = document.createElement("tr");
       tr.setAttribute("id", "tr_" + curr[index].oid);
       tr.setAttribute("data-id", curr[index].oid);
+			tr.setAttribute("data-img", curr[index].val.file);
       tr.className = "list__row";
       
       // The index
@@ -83,8 +84,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         e.preventDefault();
         
         // Fetch the id
+				console.log(this.dataset);
         let currId = this.dataset.id;
-        
+        let imgId = this.dataset.img;
+				
+				console.log("imgId=" + imgId);
+				
         overlay.style.opacity = 0;
         overlay.classList.add("is-open");
         sidebar.classList.add("is-open");
@@ -109,11 +114,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const driverContent = document.createElement('div');
         driverContent.classList = 'driver__content';
 
+				/*
         const profile = document.createElement('div');
         profile.classList = 'driver__image';
         profile.style.backgroundImage = `url('${driverImage}')`;
         newDriver.appendChild(profile);
-
+				*/
         const driverTitle = document.createElement('div');
         driverTitle.classList = 'driver__title';
         driverTitle.innerHTML = driverName;
@@ -163,13 +169,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
         donateDiv.appendChild(acceptButton);
 				
 				var currImg = document.createElement("img");
-				currImg.src = 'images/profile.jpg';
-				donateDiv.appendChild(currImg);
-				
+				currImg.setAttribute('id', 'img_' + imgId);
+				firebase.storage().ref().child('photos/' + imgId).getDownloadURL().then(function(url) {
+					// `url` is the download URL for 'images/stars.jpg'
+					// Or inserted into an <img> element:
+					console.log("inside url");
+					console.log(imgId);
+					var img = document.getElementById('img_' + imgId);
+					img.src = url;
+				}).catch(function(error) {
+					// Handle any errors
+				});
+
         tmpTable.appendChild(tbody);
         tmpTable.appendChild(donateDiv);
 				driverInfo.appendChild(tmpTable);
-        
+				
         // And add the listener
         acceptButton.onclick = function(e) {
           e.preventDefault();
@@ -190,7 +205,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 								coordinates: snap.val().coordinates,
 								img: snap.val().file,
 								sum: 0,
-								total: snap.val().cost
+								// TODO: change to fixed(2)
+								total: parseInt(snap.val().cost)
 							});
 							
 							// Update the cluster of the facility
@@ -210,19 +226,20 @@ document.addEventListener('DOMContentLoaded', (event) => {
 						}, err => {
 							console.log('Error: ' + err);
 						});
+						
+						// And remove the order
+						db.child('queue/' + orderId).remove();
 					}, err => {
 						console.log('Error: ' + err);
 					});
 					
-					// And remove the order
-					//db.child('queue/' + orderId).remove();
-					
 					// Close the sidebar
-          //sidebarClose();
+          sidebarClose();
         }
         
         driverContent.appendChild(driverInfo);
-        newDriver.appendChild(driverContent);
+				driverContent.appendChild(currImg);
+				newDriver.appendChild(driverContent);
         sidebarBody.appendChild(newDriver);
       }
     }

@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
   // Get a reference to the database service
   //var database = firebase.database();
   
+	var doc = document.documentElement.getBoundingClientRect();
+	console.log(doc);
+	
   var numFacilities = 0;
   function loadFacilities() {
     var xhttp = new XMLHttpRequest();
