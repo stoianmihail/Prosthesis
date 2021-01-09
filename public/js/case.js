@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var donation = document.getElementById("donation");
   var progressBar = document.getElementById("progressBar");
   var ratio = document.getElementById("ratio");
-  
+  var missing = document.getElementById("missing");
+	
   function initProgressBar() {
     console.log("id=" + patientId);
     const db = firebase.database().ref().child('patients/' + patientId);
@@ -19,14 +20,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
       var sum = snapshot.val().sum;
       var total = snapshot.val().total;
       var newRatio = (1.0 * sum / total);
-      ratio.innerHTML = String(newRatio.toFixed(2) * 100) + '%';
+      ratio.innerHTML = String((newRatio * 100).toFixed(2)) + '%';
+			missing.innerHTML = '-' + String(total - sum) + '$';
       progressBar.style.width = ratio.innerHTML;
       progressBar.setAttribute('data-width', newRatio * 100);
     }, function (err) {
       console.log("Error: " + err.code);
     });
   }
-
   initProgressBar();
   
   function updatePatient(id, donationAmount) {
@@ -38,9 +39,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
       // And write
       var sum = snapshot.val().sum + donationAmount;
       var total = snapshot.val().total;
+			
+			var diff = 0;
+			if (sum > total) {
+				diff = sum - total;
+				sum = total;
+			}
+			
       db.update({
         sum: sum
       });
+			console.log("diff=" + diff);
+			if (diff > 0)
+				alert("Your donation was more than it was needed.\nNo worries, we sent the rest back into your bank account.");
       // Note: the progress bar will be updated automatically
     }, function (err) {
       console.log("The read failed: " + err.code);

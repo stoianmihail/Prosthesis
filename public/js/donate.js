@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       
       // Add the listener
       tr.onclick = function (e) {
-          e.preventDefault();
+				e.preventDefault();
       
         // Fetch the id
         let currId = this.dataset.id;

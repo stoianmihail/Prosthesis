@@ -102,6 +102,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
       span5.innerHTML = '+' + curr[index].val.amount + '$';
       td5.appendChild(span5);
       
+			db.child('/patients/' + curr[index].pid).once("value", psnap => {
+				document.getElementById("span2_" + psnap.key).innerHTML = psnap.val().name;
+				document.getElementById("span3_" + psnap.key).innerHTML = String(((1.0 * psnap.val().sum / psnap.val().total) * 100).toFixed(2)) + '%';
+				document.getElementById("span4_" + psnap.key).innerHTML = '-' + (psnap.val().total - psnap.val().sum) + '$';
+			}, err => {
+				console.log("Err: " + err);
+			});
+			
       // And complete the row and the table
       tr.appendChild(td1);
       tr.appendChild(td2);

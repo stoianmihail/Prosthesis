@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var login = document.getElementById("login-button"),
   menu = document.getElementById("umenu"),
   ubutton = document.getElementById("ubutton"),
+	makeOrder = document.getElementById("makeOrder-button"),
 	orders = document.getElementById("orders-button"),
   myDonations = document.getElementById("mydonations-button"),
   logout = document.getElementById("logout-button"),
@@ -65,6 +66,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         
 				// Hide or show the orders
 				const isDoctor = userData.isDoctor;
+				makeOrder.style.display = isDoctor ? "block" : "none";
 				orders.style.display = isDoctor ? "block" : "none";
 				ubutton.innerHTML = n;
       } else {
@@ -76,6 +78,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             username: username,
 						isDoctor: isDoctor
           });
+					makeOrder.style.display = isDoctor ? "block" : "none";
 					orders.style.display = isDoctor ? "block" : "none";
           ubutton.innerHTML = username;
         }
@@ -222,6 +225,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
   
   orders.onclick = function(event) {
     event.preventDefault();
-		window.location = '/pending.html';
+		window.location = '/orders.html';
+  }
+  
+  makeOrder.onclick = function(event) {
+    event.preventDefault();
+		window.location = '/order.html';
   }
 });
