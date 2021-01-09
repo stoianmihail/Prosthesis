@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		};
 	});
 	
+	const db = firebase.database().ref();
 	var submitter = document.getElementById("submitter");
 	submitter.addEventListener("click", function(e) {
 		e.preventDefault();
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				var left = parseInt(tmp[0]);
 				var top = parseInt(tmp[1]);
 				
-				firebase.database().ref().child('facilities').once('value', snap => {
+				db.child('facilities').once('value', snap => {
 					var min = Infinity, chosen = -1;
 					snap.forEach(facility => {
 						let coords = facility.val().coordinates;
@@ -87,21 +88,39 @@ document.addEventListener('DOMContentLoaded', (event) => {
 						}
 					});
 						
+					// Update the patients
 					var estimatedCost = 50 + min * 0.5;
-					
-					console.log("whatttttttttttttttt");
-					
-					firebase.database().ref().child('queue').push().set({
-						name: name,
-						cost: estimatedCost,
-						facility: chosen,
-						coordinates: {left : left, top : top},
-						file: newName
+					db.child('patients/').once('value', patSnap => {
+						let newId = 0;
+						if (patSnap.exists())
+							newId = patSnap.val().length;
+						db.child('patients/' + newId).set({
+							name: name,
+							coordinates: {left: left, top: top},
+							img: newName,
+							sum: 0,
+							total: estimatedCost.toFixed(2)
+						});
+						
+						// Update the cluster of the facility
+						let facility = snap.val().facility;
+						db.child('facilities/' + facility + '/cluster').once('value', facSnap => {
+							let tmp = [];
+							if (facSnap.exists())
+								tmp = facSnap.val();
+							tmp.push(newId);
+							db.child('facilities/' + facility).update({
+								cluster: tmp
+							});
+						}, err => {
+							console.log("Err: " + err);
+						});
+					}, err => {
+						console.log("Err: " + err);
 					});
-				}, err => {
-					console.log('Error: ' + err);
-				});
-			}
-		);
+			}, err => {
+				console.log("Err: " + err);
+			});
+		});
 	});
 });
