@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   var progressBar = document.getElementById("progressBar");
   var ratio = document.getElementById("ratio");
   var missing = document.getElementById("missing");
+	var missingText = document.getElementById("missing-text");
+	var textType = document.getElementById("text-type");
 	
   function initProgressBar() {
     console.log("id=" + patientId);
@@ -17,13 +19,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
     db.on("value", function(snapshot) {
       img.src = snapshot.val().img;
       name.innerHTML = snapshot.val().name;
-      var sum = snapshot.val().sum;
-      var total = snapshot.val().total;
-      var newRatio = (1.0 * sum / total);
-      ratio.innerHTML = String((newRatio * 100).toFixed(2)) + '%';
-			missing.innerHTML = '-' + String(total - sum) + '$';
-      progressBar.style.width = ratio.innerHTML;
-      progressBar.setAttribute('data-width', newRatio * 100);
+			if (snapshot.val().status === "done") {
+				missingText.classList.add('hide');
+				textType.innerHTML = 'Production';
+				var prod = snapshot.val().production;
+				ratio.innerHTML = String(prod) + '%';
+				progressBar.style.width = ratio.innerHTML;
+				progressBar.setAttribute('data-width', prod);
+			} else {
+				var sum = snapshot.val().sum;
+				var total = snapshot.val().total;
+				var newRatio = (1.0 * sum / total);
+				ratio.innerHTML = String((newRatio * 100).toFixed(2)) + '%';
+				missing.innerHTML = '-' + String((total - sum).toFixed(2)) + '$';
+				progressBar.style.width = ratio.innerHTML;
+				progressBar.setAttribute('data-width', newRatio * 100);
+			}
     }, function (err) {
       console.log("Error: " + err.code);
     });
@@ -46,9 +57,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				sum = total;
 			}
 			
-      db.update({
-        sum: sum
-      });
+			if (diff > 0) {
+				db.update({
+					sum: sum,
+					status: "done",
+					production: 25,
+				});
+			} else {
+				db.update({
+					sum: sum
+				});
+			}
+			
 			console.log("diff=" + diff);
 			if (diff > 0)
 				alert("Your donation was more than it was needed.\nNo worries, we sent the rest back into your bank account.");

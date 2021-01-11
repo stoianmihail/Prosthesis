@@ -14,8 +14,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   menu = document.getElementById("umenu"),
   ubutton = document.getElementById("ubutton"),
 	makeOrder = document.getElementById("makeOrder-button"),
-	orders = document.getElementById("orders-button"),
-  myDonations = document.getElementById("mydonations-button"),
+	myDonations = document.getElementById("mydonations-button"),
   logout = document.getElementById("logout-button"),
   form_modal = document.querySelector('.user-modal'),
   form_login = document.getElementById('login'),
@@ -67,7 +66,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				// Hide or show the orders
 				const isDoctor = userData.isDoctor;
 				makeOrder.style.display = isDoctor ? "block" : "none";
-				orders.style.display = isDoctor ? "block" : "none";
 				ubutton.innerHTML = n;
       } else {
 				// Sign up? Check for username
@@ -79,8 +77,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 						isDoctor: isDoctor
           });
 					makeOrder.style.display = isDoctor ? "block" : "none";
-					orders.style.display = isDoctor ? "block" : "none";
-          ubutton.innerHTML = username;
+					ubutton.innerHTML = username;
         }
       }
     });
@@ -221,11 +218,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
       if (firebaseUser)
         window.location = '/mydonations.ejs?id=' + firebaseUser.uid;
     });
-  }
-  
-  orders.onclick = function(event) {
-    event.preventDefault();
-		window.location = '/orders.html';
   }
   
   makeOrder.onclick = function(event) {

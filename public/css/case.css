@@ -27,6 +27,10 @@ body {
   }    
 }
 
+.hide {
+	display: none;
+}
+
 nav {
   float: right;
   margin-right: 10%;
