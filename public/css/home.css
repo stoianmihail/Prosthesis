@@ -6,7 +6,7 @@
 	padding: 0;
 }
 header {
-	background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)), url('../images/run.jpg');
+	background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)), url('../images/run_better.jpg');
 	height: 100vh;
 	-webkit-background-size: cover;
 	background-size: cover;
@@ -32,14 +32,14 @@ body {
 	position: absolute;
 	width: 600px;
 	height: 300px;
-	margin: 20% 30%;
+	margin: 18.5% 29.5%;
 	text-align: center;
 }
 .welcome-text h1 {
 	text-align: center;
-	color: #fff;
+	color: #000;
 	text-transform: uppercase;
-	font-size: 60px;
+	font-size: 30px;
 }
 .welcome-text h1 span {
 	color: #00fecb;
@@ -49,8 +49,8 @@ body {
 	padding: 10px 25px;
 	text-decoration: none;
 	text-transform: uppercase;
-	font-size: 14px;
-	margin-top: 20px;
+	font-size: 20px;
+	margin-top: 30px;
 	display: inline-block;
 	color: #fff;
 }

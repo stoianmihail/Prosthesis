@@ -47,7 +47,7 @@ header::after {
 }
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f0e1b9ff;
+    background-color: #f6edd5;
     overflow: hidden;
   &.modal-active {
     overflow: hidden;
