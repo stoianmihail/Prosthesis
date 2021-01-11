@@ -147,12 +147,19 @@
 		<p>Address (needed for care)</p>
     <input type="text" placeholder="Address" id="address"/>
   </label>
-  <p>Photo of amputation</p>
-	<div id='container'>
-		<input type='file' id='file-input' hidden>
-		<button id="selector">Upload a file</button>
+  <p>Photo(s) of amputation</p>
+	<div id='container1'>
+		<input type='file' id='amputation-input' hidden>
+		<button id="amputation-selector">Upload a file</button>
 		<p>Preview</p>
-		<img id='preview'>
+		<img id='amputation-preview'>
+	</div>
+	<p>Profile (optional)</p>
+	<div id='container2'>
+		<input type='file' id='profile-input' hidden>
+		<button id="profile-selector">Upload a file</button>
+		<p>Preview</p>
+		<img id='profile-preview'>
 	</div>
 	<div id="container">
 		<progress value="0" max="100" id="uploader">0%</progress>

@@ -17,8 +17,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
     console.log("id=" + patientId);
     const db = firebase.database().ref().child('patients/' + patientId);
     db.on("value", function(snapshot) {
-      img.src = snapshot.val().img;
-      name.innerHTML = snapshot.val().name;
+			console.log(snapshot.val());
+			
+			firebase.storage().ref().child('photos/' + snapshot.val().profile).getDownloadURL().then(function(url) {
+				// Or inserted into an <img> element:
+				img.src = url;
+			}).catch(function(error) {
+				// Handle any errors
+			});
+
+			name.innerHTML = snapshot.val().name;
 			if (snapshot.val().status === "done") {
 				missingText.classList.add('hide');
 				textType.innerHTML = 'Production';
