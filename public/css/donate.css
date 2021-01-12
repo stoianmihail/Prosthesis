@@ -47,7 +47,7 @@ header::after {
 }
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f6edd5;
+    background-color: #ffe4c2;
     overflow: hidden;
   &.modal-active {
     overflow: hidden;
@@ -74,7 +74,7 @@ nav {
 
 .right {
   right: 0;
-  background-color: #d6492b;
+  background-color: #ADD8E6;
   font-size: 16px;
 }
 
@@ -94,7 +94,7 @@ nav {
 .list__table {
   width: 100%;
   border-spacing: 0;
-  color: var(--grey-9);
+  color: var(--grey-1);
   text-align: center;
 }
 .list__header {
@@ -440,4 +440,33 @@ input[type=number]::-webkit-outer-spin-button {
   font-weight: bold;
   text-align: center;
   color: #000;
+}
+
+.welcome-text {
+	margin: auto;
+	text-align: center;
+	width: 50%;
+  border: 3px solid green;
+  padding: 0.5px;
+	border-radius: 5px;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.08),
+              0 2px 2px rgba(0,0,0,0.08), 
+              0 4px 4px rgba(0,0,0,0.08), 
+              0 8px 8px rgba(0,0,0,0.08), 
+              0 16px 16px rgba(0,0,0,0.08), 
+              0 32px 32px rgba(0,0,0,0.08);
+  
+}
+.welcome-text h1 {
+	text-align: center;
+	color: var(--grey-1);
+	font-size: 25px;
+}
+.welcome-text h2 {
+	text-align: center;
+	color: var(--grey-1);
+	font-size: 20px;
+}
+.welcome-text h1 span {
+	color: #00fecb;
 }

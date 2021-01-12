@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   });
   
   // Build the table
+	var noPro = document.getElementById("no-pro");
   var customTable = document.getElementById("custom-table");
   const db = firebase.database().ref();
   db.child('patients').on('value', snap => {
@@ -30,10 +31,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
     
     // Collect the cluster
     var tmp = []
+    var succesful = 0;
     snap.forEach(patient => {
-      tmp.push({key : parseInt(patient.key), val : patient.val()});
+			if (patient.val().status === "done")
+				succesful++;
+			else
+				tmp.push({key : parseInt(patient.key), val : patient.val()});
     });
-      
+		noPro.innerHTML = succesful;
+	
+		
     // And sort
     tmp.sort((l, r) => { return (l.val.sum * r.val.total) > (r.val.sum * l.val.total) ? 1 : -1});
   
@@ -186,9 +193,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
           
       // And set the values
       document.getElementById("tr_" + index).setAttribute("data-image", tmp[index].val.img);
-      document.getElementById("span2_" + index).innerHTML = tmp[index].val.name;
+			console.log("now: " + tmp[index].val.name + " and " + tmp[index].key);
+      document.getElementById("span2_" + index).innerHTML = (tmp[index].val.name === "") ? ('Person #' + tmp[index].key) : tmp[index].val.name;
       document.getElementById("span3_" + index).innerHTML = String(((1.0 * tmp[index].val.sum / tmp[index].val.total) * 100).toFixed(2)) + '%';
-      document.getElementById("span4_" + index).innerHTML = '-' + (tmp[index].val.total - tmp[index].val.sum) + '$';
+      document.getElementById("span4_" + index).innerHTML = '-' + (tmp[index].val.total - tmp[index].val.sum).toFixed(2) + '$';
     }
   }, function(err) {
     console.log("Error: " + err.code);

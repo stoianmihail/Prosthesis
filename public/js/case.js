@@ -26,7 +26,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				// Handle any errors
 			});
 
+			// Put the name (or the order id)
 			name.innerHTML = snapshot.val().name;
+			if (snapshot.val().name === "")
+				name.innerHTML = 'Person #' + snapshot.key;
+			
+			// Put the progress bar
 			if (snapshot.val().status === "done") {
 				missingText.classList.add('hide');
 				textType.innerHTML = 'Production';
@@ -79,7 +84,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			
 			console.log("diff=" + diff);
 			if (diff > 0)
-				alert("Your donation was more than it was needed.\nNo worries, we sent the rest back into your bank account.");
+				alert("Your donation was more than it was needed.\nNo worries! We sent the rest back into your bank account.");
       // Note: the progress bar will be updated automatically
     }, function (err) {
       console.log("The read failed: " + err.code);

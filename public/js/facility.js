@@ -31,8 +31,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
   const db = firebase.database().ref();
   db.child('facilities/' + facilityId + '/cluster').on('value', snap => {
     // Collect the cluster
-    if (!snap.exists())
+    if (!snap.exists()) {
+			document.getElementById("no-pro").innerHTML = 0;
       return;
+		}
     var gathered = snap.val();
     
     // Build up the set of the cluster elements
@@ -40,16 +42,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
     for (var index = 0; index !== gathered.length; ++index)
       cluster.add(gathered[index]);
     
+		var noPro = document.getElementById("no-pro");
     var customTable = document.getElementById("custom-table");
     customTable.innerHTML = `<tr><th>#</th><th>Name</th><th>Collected</th><th>Missing</th></tr>`;
     db.child("patients").on("value", currSnap => {
       // Collect
       var tmp = []
+      var succesful = 0;
       currSnap.forEach(patient => {
-        if (cluster.has(parseInt(patient.key)))
-          tmp.push({key : parseInt(patient.key), val : patient.val()});
+        if (cluster.has(parseInt(patient.key))) {
+					if (patient.val().status === "done")
+						succesful++;
+					else
+						tmp.push({key : parseInt(patient.key), val : patient.val()});
+				}
       });
-      
+      noPro.innerHTML = succesful;
+			
       // And sort
       tmp.sort((l, r) => { return (l.val.sum * r.val.total) > (r.val.sum * l.val.total) ? 1 : -1});
     
@@ -202,7 +211,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             
         // And set the values
         document.getElementById("tr_" + index).setAttribute("data-image", tmp[index].val.img);
-        document.getElementById("span2_" + index).innerHTML = tmp[index].val.name;
+        document.getElementById("span2_" + index).innerHTML = (tmp[index].val.name === "") ? ('Person #' + tmp[index].key) : tmp[index].val.name;
         document.getElementById("span3_" + index).innerHTML = String(((1.0 * tmp[index].val.sum / tmp[index].val.total) * 100).toFixed(2)) + '%';
         document.getElementById("span4_" + index).innerHTML = '-' + (tmp[index].val.total - tmp[index].val.sum) + '$';
       }

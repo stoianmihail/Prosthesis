@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			return false;
 		}
 		
-		if (printError(name, "", "name")) return;
+		// Optional: if (printError(name, "", "name")) return;
 		if (printError(address, "", "address")) return;
 		if (printError(amputationFiles.length, 0, "file")) return;
 		if (printError(profileFiles.length, 0, "file")) return;
@@ -91,7 +91,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		function finishTask() {
 			if (completed < 2)
 				return;
-			console.log("entered");
 			
 			var tmp = address.split(",");
 			var left = parseInt(tmp[0]);
@@ -124,6 +123,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 						sum: 0,
 						total: estimatedCost.toFixed(2)
 					});
+					
+					// Notify the doctor
+					alert("Order: #" + newId); 
 					
 					// Update the cluster of the facility
 					let facility = chosen;
@@ -171,89 +173,5 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 		myItems = [{name: ampName, obj: amp}, {name: profileName, obj: profile}]
 		myItems.map(item => uploadImageAsPromise(item))
-		
-		/*
-		function putStorageItem(item) {
-			// the return value will be a Promise
-			return firebase.storage().ref("photos/" + item.name).put(item.obj, { contentType: item.obj.type })
-			.then((snapshot) => {
-				console.log('One success:', item)
-			}).catch((error) => {
-				console.log('One failed:', item, error.message)
-			});
-		}
-
-		Promise.all(
-			// Array of "Promises"
-			myItems.map(item => putStorageItem(item))
-		)
-		.then((url) => {
-			console.log(`All success`)
-		})
-		.catch((error) => {
-			console.log(`Some failed: `, error.message)
-		});
-		*/
-		/*
-		task.on('state_changed',
-			function progress(snap) {
-				var p = (snap.bytesTransferred / snap.totalBytes) * 100;
-				uploader.value = p;
-			},
-			function error(err) {
-				console.log(err);
-			},
-			function complete() {
-				// Compute the location
-				var tmp = address.split(",");
-				var left = parseInt(tmp[0]);
-				var top = parseInt(tmp[1]);
-				
-				db.child('facilities').once('value', snap => {
-					var min = Infinity, chosen = -1;
-					snap.forEach(facility => {
-						let coords = facility.val().coordinates;
-						let dist = Math.sqrt((coords["left"] - left)**2 + (coords["top"] - top)**2);
-						if (dist < min) {
-							min = dist;
-							chosen = facility.key;
-						}
-					});
-						
-					// Update the patients
-					var estimatedCost = 50 + min * 0.5;
-					db.child('patients/').once('value', patSnap => {
-						let newId = 0;
-						if (patSnap.exists())
-							newId = patSnap.val().length;
-						db.child('patients/' + newId).set({
-							name: name,
-							coordinates: {left: left, top: top},
-							img: newName,
-							sum: 0,
-							total: estimatedCost.toFixed(2)
-						});
-						
-						// Update the cluster of the facility
-						let facility = snap.val().facility;
-						db.child('facilities/' + facility + '/cluster').once('value', facSnap => {
-							let tmp = [];
-							if (facSnap.exists())
-								tmp = facSnap.val();
-							tmp.push(newId);
-							db.child('facilities/' + facility).update({
-								cluster: tmp
-							});
-						}, err => {
-							console.log("Err: " + err);
-						});
-					}, err => {
-						console.log("Err: " + err);
-					});
-			}, err => {
-				console.log("Err: " + err);
-			});
-		});
-	*/
 	});
 });

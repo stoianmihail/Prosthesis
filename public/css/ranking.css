@@ -45,7 +45,7 @@ header::after {
   clear: both;
 }
 body {
-    background-color: #f0e1b9ff;
+    background-color: #ffe4c2;
     overflow: hidden;
   &.modal-active {
     overflow: hidden;
@@ -115,7 +115,7 @@ nav a:hover::before {
 
 .right {
   right: 0;
-  background-color: #d6492b;
+  background-color: #ADD8E6;
   font-size: 16px;
 }
 
@@ -138,7 +138,7 @@ nav a:hover::before {
 .list__table {
   width: 100%;
   border-spacing: 0;
-  color: var(--grey-9);
+  color: var(--grey-1);
   text-align: center;
 }
 .list__header {
