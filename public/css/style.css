@@ -22,10 +22,25 @@ header::after {
 }
 body {
 	font-family: 'Poppins', sans-serif;
-    overflow: hidden;
   &.modal-active {
     overflow: hidden;
   }    
+}
+
+.center {
+	margin-top: 50px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 20%;
+	height: 20%;
+	border-radius: 10px;
+	box-shadow: 0 1px 1px rgba(0,0,0,0.08),
+              0 2px 2px rgba(0,0,0,0.08), 
+              0 4px 4px rgba(0,0,0,0.08), 
+              0 8px 8px rgba(0,0,0,0.08), 
+              0 16px 16px rgba(0,0,0,0.08), 
+              0 32px 32px rgba(0,0,0,0.08);
 }
 
 /*
@@ -58,6 +73,8 @@ header::after {
   clear: both;
 }
 */
+
+/*
 .logo {
   float: left;
   padding: 10px 0;
@@ -133,13 +150,12 @@ header::after {
 }
 
 .popup .pin:hover {
-  -ms-transform: scale(1.5); /* IE 9 */
-  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  -ms-transform: scale(1.5);
+  -webkit-transform: scale(1.5); 
   transform: scale(1.5); 
   transition: all .3s ease-in-out; 
 }
 
-/* The actual popup */
 .popup .popuptext {
   visibility: hidden;
   width: 160px;
@@ -178,7 +194,6 @@ header::after {
   font-size: 20px;
 }
 
-/* Popup arrow */
 .popup .popuptext::after {
   content: "";
   position: absolute;
@@ -189,14 +204,12 @@ header::after {
   border-color: #555 transparent transparent transparent;
 }
 
-/* Toggle this class - hide and show the popup */
 .popup .show {
   visibility: visible;
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s;
 }
 
-/* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
   from {opacity: 0;} 
   to {opacity: 1;}
@@ -205,4 +218,4 @@ header::after {
 @keyframes fadeIn {
   from {opacity: 0;}
   to {opacity:1 ;}
-}
+}*/

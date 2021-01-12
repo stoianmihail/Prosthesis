@@ -104,3 +104,42 @@ body {
   color: #fff;
   transform: translateY(-10px);
 }
+
+.custom-text {
+	text-align: center;
+}
+.custom-text h1 {
+	text-align: center;
+	color: #000;
+	text-transform: uppercase;
+	font-size: 50px;
+}
+
+.custom-text h1 span {
+	color: #d53363;
+}
+
+.custom-text h2 {
+	text-align: center;
+	color: #000;
+	text-transform: uppercase;
+	font-size: 20px;
+}
+.custom-text h2 span {
+	color: #d53363;
+}
+
+.custom-text a {
+	border: 1px solid #fff;
+	padding: 10px 25px;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 14px;
+	margin-top: 20px;
+	display: inline-block;
+	color: #fff;
+}
+.welcome-text a:hover {
+	background: #fff;
+	color: #333;
+}
