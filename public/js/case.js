@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				// Or inserted into an <img> element:
 				img.src = url;
 			}).catch(function(error) {
-				// Handle any errors
+				img.src = 'images/profile.jpg';
 			});
 
 			// Put the name (or the order id)
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				var total = snapshot.val().total;
 				var newRatio = (1.0 * sum / total);
 				ratio.innerHTML = String((newRatio * 100).toFixed(2)) + '%';
-				missing.innerHTML = '-' + String((total - sum).toFixed(2)) + '$';
+				missing.innerHTML = '-' + String((total - sum).toFixed(2)) + '€';
 				progressBar.style.width = ratio.innerHTML;
 				progressBar.setAttribute('data-width', newRatio * 100);
 			}

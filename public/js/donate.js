@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			console.log("now: " + tmp[index].val.name + " and " + tmp[index].key);
       document.getElementById("span2_" + index).innerHTML = (tmp[index].val.name === "") ? ('Person #' + tmp[index].key) : tmp[index].val.name;
       document.getElementById("span3_" + index).innerHTML = String(((1.0 * tmp[index].val.sum / tmp[index].val.total) * 100).toFixed(2)) + '%';
-      document.getElementById("span4_" + index).innerHTML = '-' + (tmp[index].val.total - tmp[index].val.sum).toFixed(2) + '$';
+      document.getElementById("span4_" + index).innerHTML = '-' + (tmp[index].val.total - tmp[index].val.sum).toFixed(2) + '€';
     }
   }, function(err) {
     console.log("Error: " + err.code);

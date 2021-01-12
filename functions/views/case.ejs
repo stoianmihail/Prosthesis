@@ -39,7 +39,7 @@
         <ul>
             <li><a href="/index.html">Home</a></li>
             <li><a href="/concept.html">Concept</a></li>
-            <li><a href="/about.html">About</a></li>
+            <li><a href="/about.html">Tech</a></li>
             <li><a href="/donate.html">Donate</a></li>
             <li><a href="/contact.html">Contact</a></li>
             <li>
@@ -63,9 +63,9 @@
 
     <!-- BODY -->
     <body id="body" data-spy="scroll" data-target=".header">
-    <div class="split left">
+    <div>
         <!--========== PAGE LAYOUT ==========-->
-        <!-- About -->
+        <!-- Tech -->
         <div id="about">
             <div class="container content-lg">
                 <div class="row">
@@ -91,15 +91,26 @@
                                 <div class="progress-bar bg-color-base" role="progressbar" id="progressBar" data-width=""></div>
                             </div>
                         </div>
+													<div class="dnt">
+															<div class="number-input">
+																	<button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+																	<input class="quantity" min="0" name="quantity" value="1" type="number" id="donation">
+																	<button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+															</div>
+															<div>
+																<button class="button" id="button">Donate</button>
+															</div>
+													</div>
                         <!-- End Progress Box -->
                     </div>
-                </div>
+								</div>
                 <!--// end row -->
             </div>
+            <div class="row">
+            </div>
         </div>
-        
         </div> <!-- split left -->
-        
+        <!--
         <div class="split right">
             <div class="dnt">
                 <div class="number-input">
@@ -108,11 +119,11 @@
                     <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
                 </div>
                 <div>
-                    <button class="button" id="button">Donate</button>
+									<button class="button" id="button">Donate</button>
                 </div>
             </div>
         </div>
-        
+        -->
         <div class="user-modal">
   <div class="user-modal-container">
     <ul class="switcher">
@@ -205,7 +216,7 @@
 </div>
 
         
-        <!-- End About -->
+        <!-- End Tech -->
             
         <!--========== END PAGE LAYOUT ==========-->
 

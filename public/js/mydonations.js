@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       cluster.add(donation.key);
     });
     curr.sort((l, r) => { return l.val.amount < r.val.amount ? 1 : -1});
-    total.innerHTML = `Total: ` + totalAmount + '$';
+    total.innerHTML = `Total: ` + totalAmount + '€';
     
     /*
       <tr><th>#</th><th>Name</th><th>Collected</th><th>Missing</th><th>My Donation</th></tr>
@@ -99,13 +99,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
       var span5 = document.createElement("span");
       span5.setAttribute("id", "span5_" + curr[index].pid);
       span5.className = "list__value";
-      span5.innerHTML = '+' + curr[index].val.amount + '$';
+      span5.innerHTML = '+' + curr[index].val.amount + '€';
       td5.appendChild(span5);
       
 			db.child('/patients/' + curr[index].pid).once("value", psnap => {
 				document.getElementById("span2_" + psnap.key).innerHTML = (psnap.val().name !== "" ? psnap.val().name : ('Patient #' + psnap.key))
 				document.getElementById("span3_" + psnap.key).innerHTML = String(((1.0 * psnap.val().sum / psnap.val().total) * 100).toFixed(2)) + '%';
-				document.getElementById("span4_" + psnap.key).innerHTML = '-' + (psnap.val().total - psnap.val().sum).toFixed(2) + '$';
+				document.getElementById("span4_" + psnap.key).innerHTML = '-' + (psnap.val().total - psnap.val().sum).toFixed(2) + '€';
 			}, err => {
 				console.log("Err: " + err);
 			});

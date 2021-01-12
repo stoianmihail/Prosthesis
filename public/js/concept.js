@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 		return {X:curleft,Y:curtop};
 	}
 	
+	var now = 85;
 	var numFacilities = 0;
 	function loadFacilities(ret) {
 		var xhttp = new XMLHttpRequest();
@@ -44,7 +45,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 				}
 				
 				console.log("which=" + which);
-				
 				for (var i = 0, size = response.length; i !== size; i++) {
 					if (i !== which)
 						continue;
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 					
 					var tmp = document.getElementById("map").getBoundingClientRect();
 					var doc = document.documentElement.getBoundingClientRect();
-					img.style.top = (tmp.top + 1.0 * tmp.height * pin["coordinates"]["top"] / 100) + 'px'
+					img.style.top = (tmp.top + 1.0 * tmp.height * 40 * pin["coordinates"]["top"] / doc.height) + 'px'
 					img.style.left = (tmp.left + 1.0 * tmp.width * pin["coordinates"]["left"] / doc.width) + 'px'
 					img.setAttribute("id", "pin_" + i);
 					img.setAttribute("onclick", "window.location = '/facility.ejs?id=" + which + "';");

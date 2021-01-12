@@ -6,7 +6,7 @@
 	padding: 0;
 }
 header {
-	background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)), url('../images/run_better.jpg');
+	background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)), url('../images/run-finished.jpg');
 	height: 100vh;
 	-webkit-background-size: cover;
 	background-size: cover;
@@ -116,7 +116,7 @@ body {
 }
 
 .custom-text h1 span {
-	color: #d53363;
+	color: #2E8B57;
 }
 
 .custom-text h2 {
@@ -126,7 +126,7 @@ body {
 	font-size: 20px;
 }
 .custom-text h2 span {
-	color: #d53363;
+	color: #2E8B57;
 }
 
 .custom-text a {
