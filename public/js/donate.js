@@ -48,7 +48,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
       // The image
       var tr = document.createElement("tr");
       tr.setAttribute("data-id", tmp[index].key);
-      tr.setAttribute("id", "tr_" + index);
+			tr.setAttribute("data-image", tmp[index].val.profile);
+			tr.setAttribute("id", "tr_" + index);
       tr.className = "list__row";
       
       // The index
@@ -97,7 +98,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
       
         // Fetch the id
         let currId = this.dataset.id;
-        
+				let currIndex = parseInt(this.id.split("_")[1]);
+				
         overlay.style.opacity = 0;
         overlay.classList.add("is-open");
         sidebar.classList.add("is-open");
@@ -122,11 +124,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const driverContent = document.createElement('div');
         driverContent.classList = 'driver__content';
 
-        const profile = document.createElement('div');
+        var profile = document.createElement('img');
         profile.classList = 'driver__image';
-        profile.style.backgroundImage = `url('${driverImage}')`;
-        newDriver.appendChild(profile);
-
+        
+				// And set the image
+				firebase.storage().ref().child('photos/' + driverImage).getDownloadURL().then(function(url) {
+					profile.src = url;
+				}).catch(function(error) {
+					profile.src = 'images/profile.jpg';
+				});
+				newDriver.appendChild(profile);
+				
         const driverTitle = document.createElement('div');
         driverTitle.classList = 'driver__title';
         driverTitle.innerHTML = driverName;
@@ -190,11 +198,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         newDriver.appendChild(driverContent);
         sidebarBody.appendChild(newDriver);
       }
-          
-      // And set the values
-      document.getElementById("tr_" + index).setAttribute("data-image", tmp[index].val.img);
-			console.log("now: " + tmp[index].val.name + " and " + tmp[index].key);
-      document.getElementById("span2_" + index).innerHTML = (tmp[index].val.name === "") ? ('Person #' + tmp[index].key) : tmp[index].val.name;
+			
+			document.getElementById("span2_" + index).innerHTML = (tmp[index].val.name === "") ? ('Person #' + tmp[index].key) : tmp[index].val.name;
       document.getElementById("span3_" + index).innerHTML = String(((1.0 * tmp[index].val.sum / tmp[index].val.total) * 100).toFixed(2)) + '%';
       document.getElementById("span4_" + index).innerHTML = '-' + (tmp[index].val.total - tmp[index].val.sum).toFixed(2) + '€';
     }

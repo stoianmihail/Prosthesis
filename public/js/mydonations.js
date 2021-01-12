@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       var tr = document.createElement("tr");
       tr.setAttribute("id", "tr_" + curr[index].pid);
       tr.setAttribute("data-id", curr[index].pid);
-      tr.className = "list__row";
+			tr.className = "list__row";
       
       // The index
       var td1 = document.createElement("td");
@@ -103,6 +103,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       td5.appendChild(span5);
       
 			db.child('/patients/' + curr[index].pid).once("value", psnap => {
+				document.getElementById("tr_" + psnap.key).setAttribute("data-image", psnap.val().profile);
 				document.getElementById("span2_" + psnap.key).innerHTML = (psnap.val().name !== "" ? psnap.val().name : ('Patient #' + psnap.key))
 				document.getElementById("span3_" + psnap.key).innerHTML = String(((1.0 * psnap.val().sum / psnap.val().total) * 100).toFixed(2)) + '%';
 				document.getElementById("span4_" + psnap.key).innerHTML = '-' + (psnap.val().total - psnap.val().sum).toFixed(2) + '€';
@@ -149,10 +150,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
         const driverContent = document.createElement('div');
         driverContent.classList = 'driver__content';
 
-        const profile = document.createElement('div');
+        const profile = document.createElement('img');
         profile.classList = 'driver__image';
-        profile.style.backgroundImage = `url('${driverImage}')`;
-        newDriver.appendChild(profile);
+        // And set the image
+				firebase.storage().ref().child('photos/' + driverImage).getDownloadURL().then(function(url) {
+					profile.src = url;
+				}).catch(function(error) {
+					profile.src = 'images/profile.jpg';
+				});
+				newDriver.appendChild(profile);
 
         const driverTitle = document.createElement('div');
         driverTitle.classList = 'driver__title';
